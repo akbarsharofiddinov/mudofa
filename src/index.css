@@ -131,6 +131,12 @@ body {
   background-color: #000 !important;
 }
 
+#book {
+  width: 100vw;
+  height: 100vh;
+  background: radial-gradient(#0e62d7, #232323 80%);
+}
+
 @layer base {
   * {
     @apply border-border outline-ring/50;
@@ -982,6 +988,10 @@ nav .navigation-label {
 }
 
 @keyframes dotFlow {
-  0% { transform: translateX(0); }
-  100% { transform: translateX(16px); }
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(16px);
+  }
 }
