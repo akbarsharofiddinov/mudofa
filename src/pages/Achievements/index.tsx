@@ -1,11 +1,14 @@
 import React from 'react'
 import InfiniteMenu from './InfiniMenu'
+
+import sport1 from "@/assets/sportsmen/sport-1.png"
+
 const items = [
   {
-    image: 'https://picsum.photos/300/300?grayscale',
+    image: sport1,
     link: 'https://google.com/',
-    title: 'Item 1',
-    description: 'This is pretty cool, right?'
+    title: 'Bokschi',
+    description: 'Murodjon Ahmadaliyev 1994 2- noyabr'
   },
   {
     image: 'https://picsum.photos/400/400?grayscale',

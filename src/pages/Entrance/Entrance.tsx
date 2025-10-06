@@ -4,6 +4,7 @@ import React, { useState } from 'react'
 import { Outlet, useNavigate } from 'react-router-dom'
 import NavigationLogo from '@/components/NavigationLogo';
 import { Cursor, useTypewriter } from 'react-simple-typewriter';
+import LightRays from '@/components/UI/LaytRay';
 
 const navItems = [
   {
@@ -81,39 +82,50 @@ const Entrance: React.FC = () => {
           </ShinyText>
         </button>
 
-
-
-
       </main>
 
-      <nav className={`fixed inset-x-0 bottom-0 z-20 w-full bg-yellow-500/10 backdrop-blur-md border-t border-yellow-500/30 py-6 transition-all duration-1000 opacity-100 translate-y-0`}>
-        <div className="navbar-container w-full mx-auto px-8 lg:px-12 xl:px-16 2xl:px-20 relative">
-          {/* Timeline Navigation Items - Yellow Theme */}
-          <ul className="relative flex items-center justify-between min-h-[70px] w-full">
-            {/* Gradient Dotted Line */}
-            <div className="gradient-dotted-line absolute top-1/2 left-0 right-0 h-1 transform -translate-y-1/2 z-0"></div>
+      {!showEntrance && (
+        <nav className={`fixed inset-x-0 bottom-0 z-20 w-full bg-yellow-500/10 backdrop-blur-md border-t border-yellow-500/30 py-6 transition-all duration-1000 opacity-100 translate-y-0`}>
+          <div className="navbar-container w-full mx-auto px-8 lg:px-12 xl:px-16 2xl:px-20 relative">
+            {/* Timeline Navigation Items - Yellow Theme */}
+            <ul className="relative flex items-center justify-between min-h-[70px] w-full">
+              {/* Gradient Dotted Line */}
+              <div className="gradient-dotted-line absolute top-1/2 left-0 right-0 h-1 transform -translate-y-1/2 z-0"></div>
 
-            {navItems.map((item, index) => (
-              <li key={index} onClick={() => navigate(item.link)} className="flex-1 relative z-10">
-                <div className="motion-navigation-item group cursor-pointer relative flex flex-col items-center justify-center p-2 transition-all duration-300 hover:scale-105">
-                  <div className="motion-navigation-dot w-2 h-2 rounded-full mb-2 transition-all duration-300 bg-yellow-500/60 group-hover:bg-yellow-500 group-hover:shadow-[0_0_15px_yellow] group-hover:scale-150"></div>
-                  <div className="motion-navigation-label text-xs text-white/70 group-hover:text-yellow-300 font-medium tracking-wider transition-all duration-300 text-center leading-tight max-w-[90px]">
-                    {item.label}
+              {navItems.map((item, index) => (
+                <li key={index} onClick={() => navigate(item.link)} className="flex-1 relative z-10">
+                  <div className="motion-navigation-item group cursor-pointer relative flex flex-col items-center justify-center p-2 transition-all duration-300 hover:scale-105">
+                    <div className="motion-navigation-dot w-2 h-2 rounded-full mb-2 transition-all duration-300 bg-yellow-500/60 group-hover:bg-yellow-500 group-hover:shadow-[0_0_15px_yellow] group-hover:scale-150"></div>
+                    <div className="motion-navigation-label text-xs text-white/70 group-hover:text-yellow-300 font-medium tracking-wider transition-all duration-300 text-center leading-tight max-w-[90px]">
+                      {item.label}
+                    </div>
+                    <div className="absolute inset-0 rounded-lg opacity-0 group-hover:opacity-20 transition-opacity duration-300 bg-yellow-500"></div>
                   </div>
-                  <div className="absolute inset-0 rounded-lg opacity-0 group-hover:opacity-20 transition-opacity duration-300 bg-yellow-500"></div>
-                </div>
-              </li>
-            ))}
-          </ul>
-        </div>
-      </nav>
+                </li>
+              ))}
+            </ul>
+          </div>
+        </nav>
+      )}
 
       {/* Entrance Overlay */}
       {showEntrance && (
         <div className='fixed inset-0 z-50 flex items-center justify-center bg-black/10 backdrop-blur-xl'>
-          <div className='relative w-full flex items-center z-90 justify-center h-screen p-8 bg-white/10 backdrop-blur-md'>
 
-            <div className='text-center flex flex-col items-center break-words text-white space-y-6'>
+          <div className='relative w-full flex items-center z-90 justify-center h-screen p-8 backdrop-blur-md'>
+            <LightRays raysOrigin="top-center"
+              raysColor="#00ffff"
+              raysSpeed={1.5}
+              lightSpread={0.8}
+              rayLength={1.2}
+              followMouse={true}
+              mouseInfluence={0.1}
+              noiseAmount={0.1}
+              distortion={0.05}
+              className="custom-rays h-screen" />
+
+            <div className='text-center absolute inset-0 flex flex-col justify-center items-center break-words text-white space-y-6'>
+
               <h1 className='text-7xl font-normal max-w-[1100px] bg-gradient-to-r from-blue-400 to-purple-400 bg-clip-text text-white'>
                 {text[0]}
                 <Cursor cursorStyle='|' />

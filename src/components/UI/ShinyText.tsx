@@ -20,7 +20,6 @@ interface GlareHoverProps {
 const GlareHover: React.FC<GlareHoverProps> = ({
   width = '100px',
   height = '50px',
-  background = '#000',
   borderRadius = '10px',
   borderColor = '#333',
   children,
@@ -82,7 +81,7 @@ const GlareHover: React.FC<GlareHoverProps> = ({
     backgroundSize: `${glareSize}% ${glareSize}%, 100% 100%`,
     backgroundRepeat: 'no-repeat',
     backgroundPosition: '-100% -100%, 0 0',
-    pointerEvents: 'none'
+    pointerEvents: 'none',
   };
 
   return (

@@ -1,14 +1,5 @@
-import { useRef, useState, useEffect } from 'react';
-import type { FC } from 'react';
+import React, {  useRef, useState, useEffect, type MutableRefObject } from 'react';
 import { mat4, quat, vec2, vec3 } from 'gl-matrix';
-
-// Achievement Images - 2024-2025 Uzbek Sports
-import achievement1 from "@/assets/sportsmen/sport-1.jpg" // Murodjon Axmadaliyev
-import achievement2 from "@/assets/sportsmen/sport-2.jpg" // Bahodir Jalolov
-import achievement3 from "@/assets/sportsmen/sport-3.jpg" // Xasanboy Dusmatov
-import achievement4 from "@/assets/sportsmen/sport-4.jpg" // Fazliddin Erkinboyev
-import achievement5 from "@/assets/sportsmen/sport-5.jpg" // Karomat Omonova
-import achievement6 from "@/assets/sportsmen/sport-6.jpg" // Nurxon Qurbonova
 
 const discVertShaderSource = `#version 300 es
 
@@ -672,10 +663,6 @@ class InfiniteGridMenu {
   private worldMatrix = mat4.create();
   private tex: WebGLTexture | null = null;
   private control!: ArcballControl;
-  private canvas: HTMLCanvasElement;
-  private items: MenuItem[];
-  private onActiveItemChange: ActiveItemCallback;
-  private onMovementChange: MovementChangeCallback;
 
   private discLocations!: {
     aModelPosition: number;
@@ -712,8 +699,6 @@ class InfiniteGridMenu {
   private _frames = 0;
 
   private movementActive = false;
-  private smoothRotationVelocity = 0;
-  private scaleFactor = 1;
 
   private TARGET_FRAME_DURATION = 1000 / 60;
   private SPHERE_RADIUS = 2;
@@ -732,6 +717,15 @@ class InfiniteGridMenu {
       inversProjection: mat4.create()
     }
   };
+
+  public smoothRotationVelocity = 0;
+  public scaleFactor = 1.0;
+
+  private canvas: HTMLCanvasElement;
+  private items: MenuItem[];
+  private onActiveItemChange: ActiveItemCallback;
+  private onMovementChange: MovementChangeCallback;
+
   constructor(
     canvas: HTMLCanvasElement,
     items: MenuItem[],
@@ -1057,64 +1051,10 @@ class InfiniteGridMenu {
 
 const defaultItems: MenuItem[] = [
   {
-    image: achievement1,
-    link: '#',
-    title: 'Murojon Axmadaliyev - Olympic Medalist',
-    description: 'Murojon Axmadaliyev (born November 2, 1994) is an Uzbek boxer in the 56 kg weight category. He won a gold medal at the 2021 Asian Championship and a silver medal at the 2020 Asian Cup. He also participated in the 2020 Summer Olympics. In 2024, he won a bronze medal at the Paris Olympics.'
-  },
-  {
-    image: achievement2,
-    link: '#',
-    title: 'Bahodir Jalolov - Professional Boxing Champion',
-    description: 'Olympic and World champion Bahodir Jalolov turned professional in 2024 and achieved several important victories. He defeated Russian Vitaliy Kudukov at the IBA.PRO boxing evening in St. Petersburg. In 2025, he entered the WBC top-5 ranking.'
-  },
-  {
-    image: achievement3,
-    link: '#',
-    title: 'Hasanboy Dusmatov - World Championship',
-    description: 'Hasanboy Dusmatov (born August 5, 1993) is an Uzbek boxer. He won the gold medal again at the 2024 World Championship. He was the gold medalist at the 2016 Summer Olympics and decided to turn professional in 2025.'
-  },
-  {
-    image: achievement4,
-    link: '#',
-    title: 'Fazliddin Erkinboyev - Youth World Champion',
-    description: 'Fazliddin Erkinboyev (born August 6, 2005) is an Uzbek boxer. He became the gold medalist in the middleweight (75 kg) category at the 2024 Youth World Championship. In 2025, he also won the World Boxing Cup. He is one of the most promising young boxers in the Uzbekistan national team.'
-  },
-  {
-    image: achievement5,
-    link: '#',
-    title: 'Karomat Omonova - Para Athletics World Champion',
-    description: 'Karomat Omonova (born April 28, 2005) is an Uzbek para-athlete. She won a bronze medal at the 2024 Paris Paralympics. In October 2025, at the Para World Athletics Championships in New Delhi, India, she became world champion in the womens F46 category shot put with a result of 13.07 meters, setting a new Asian record.'
-  },
-  {
-    image: achievement6,
-    link: '#',
-    title: 'Nurhan Qurbonova - Paralympic Champion',
-    description: 'Nurhan Qurbonova (born August 12, 1994) is an Uzbek para-athlete. In 2024 in Paris, she won a gold medal in the F54 class javelin throw with a result of 21.12 meters, setting a new world record. She won silver and bronze medals at the 2020 Tokyo Paralympics. In 2025, she set a new world record.'
-  },
-  {
-    image: achievement1,
-    link: '#',
-    title: 'Uzbekistan Football Team - AFC Cup',
-    description: 'In 2024, the Uzbekistan national football team participated in the AFC Asian Cup final and played against Japan. Although they lost in the final, this result is considered a historic achievement for Uzbekistan football. The team entered the top strongest teams in Asia in the ranking.'
-  },
-  {
-    image: achievement2,
-    link: '#',
-    title: 'Wrestling Federation - World Championship',
-    description: 'At the 2024 World Wrestling Championship, the Uzbekistan national team won 8 medals, including 3 gold medals. With this result, Uzbekistan took 2nd place in the world ranking. New young talents emerged in 2025.'
-  },
-  {
-    image: achievement3,
-    link: '#',
-    title: 'Swimming Sport - New Records',
-    description: 'In 2024-2025, Uzbekistan swimmers set several national records. In particular, important results were achieved at the Asian Championships. Young swimmers are preparing for the 2028 Olympics.'
-  },
-  {
-    image: achievement4,
-    link: '#',
-    title: 'Athletics - Asian Record',
-    description: 'In 2025, Uzbekistan athletes set several Asian records. In particular, important results were achieved in long jump and running. The Olympic sports development program is being successfully implemented.'
+    image: 'https://picsum.photos/900/900?grayscale',
+    link: 'https://google.com/',
+    title: '',
+    description: ''
   }
 ];
 
@@ -1122,78 +1062,56 @@ interface InfiniteMenuProps {
   items?: MenuItem[];
 }
 
-const InfiniteMenu: FC<InfiniteMenuProps> = ({ items = [] }) => {
-  const canvasRef = useRef<HTMLCanvasElement>(null);
-  const sketchRef = useRef<InfiniteGridMenu | null>(null);
+const InfiniteMenu: React.FC<InfiniteMenuProps> = ({ items = [] }) => {
+  const canvasRef = useRef<HTMLCanvasElement | null>(null) as MutableRefObject<HTMLCanvasElement | null>;
   const [activeItem, setActiveItem] = useState<MenuItem | null>(null);
   const [isMoving, setIsMoving] = useState<boolean>(false);
 
   useEffect(() => {
     const canvas = canvasRef.current;
-
-    // Use defaultItems as the primary source, fallback to items prop if provided
-    const activeItems = items.length > 0 ? items : defaultItems;
+    let sketch: InfiniteGridMenu | null = null;
 
     const handleActiveItem = (index: number) => {
-      if (!activeItems.length) return;
-      const itemIndex = index % activeItems.length;
-      setActiveItem(activeItems[itemIndex]);
+      if (!items.length) return;
+      const itemIndex = index % items.length;
+      setActiveItem(items[itemIndex]);
     };
 
     if (canvas) {
-      console.log('Initializing InfiniteGridMenu with items:', activeItems.length);
-      console.log('First item:', activeItems[0]);
-
-      try {
-        sketchRef.current = new InfiniteGridMenu(canvas, activeItems, handleActiveItem, setIsMoving, sk => {
-          console.log('InfiniteGridMenu initialized, starting...');
-          sk.run();
-        });
-      } catch (error) {
-        console.error('Error initializing InfiniteGridMenu:', error);
-      }
-    } else {
-      console.error('Canvas ref is null');
+      sketch = new InfiniteGridMenu(canvas, items.length ? items : defaultItems, handleActiveItem, setIsMoving, sk =>
+        sk.run()
+      );
     }
 
     const handleResize = () => {
-      if (sketchRef.current) {
-        sketchRef.current.resize();
+      if (sketch) {
+        sketch.resize();
       }
     };
 
     window.addEventListener('resize', handleResize);
-    // Delay the initial resize to ensure canvas is mounted
-    setTimeout(() => {
-      handleResize();
-      if (sketchRef.current) {
-        console.log('Force starting after timeout...');
-      }
-    }, 100);
+    handleResize();
 
     return () => {
       window.removeEventListener('resize', handleResize);
-      if (sketchRef.current) {
-        console.log('Cleaning up InfiniteGridMenu');
-        sketchRef.current = null;
-      }
     };
   }, [items]);
 
+  const handleButtonClick = () => {
+    if (!activeItem?.link) return;
+    if (activeItem.link.startsWith('http')) {
+      window.open(activeItem.link, '_blank');
+    } else {
+      console.log('Internal route:', activeItem.link);
+    }
+  };
 
   return (
-    <div className="relative w-full h-full bg-transparent">
-
+    <div className="relative w-full h-full">
       <canvas
         id="infinite-grid-menu-canvas"
-        ref={(el) => {
-          canvasRef.current = el;
-          if (el) {
-            console.log('Canvas mounted, dimensions:', el.clientWidth, 'x', el.clientHeight);
-          }
-        }}
-        className="cursor-grab w-full h-full overflow-hidden relative outline-none active:cursor-grabbing bg-transparent"
-        style={{ display: 'block' }}
+        ref={canvasRef}
+        className="cursor-grab w-full h-full overflow-hidden relative outline-none active:cursor-grabbing"
       />
 
       {activeItem && (
@@ -1238,6 +1156,32 @@ const InfiniteMenu: FC<InfiniteMenuProps> = ({ items = [] }) => {
           >
             {activeItem.description}
           </p>
+
+          <div
+            onClick={handleButtonClick}
+            className={`
+          absolute
+          left-1/2
+          z-10
+          w-[60px]
+          h-[60px]
+          grid
+          place-items-center
+          bg-[#00ffff]
+          border-[5px]
+          border-black
+          rounded-full
+          cursor-pointer
+          transition-all
+          ease-[cubic-bezier(0.25,0.1,0.25,1.0)]
+          ${isMoving
+                ? 'bottom-[-80px] opacity-0 pointer-events-none duration-[100ms] scale-0 -translate-x-1/2'
+                : 'bottom-[3.8em] opacity-100 pointer-events-auto duration-[500ms] scale-100 -translate-x-1/2'
+              }
+        `}
+          >
+            <p className="select-none relative text-[#060010] top-[2px] text-[26px]">&#x2197;</p>
+          </div>
         </>
       )}
     </div>
