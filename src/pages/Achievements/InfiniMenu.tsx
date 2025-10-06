@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
 import { useRef, useState, useEffect } from 'react';
 import type { FC } from 'react';
 import { mat4, quat, vec2, vec3 } from 'gl-matrix';

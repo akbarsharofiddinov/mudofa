@@ -1,6 +1,6 @@
-import React, { useState, useRef, useCallback, useEffect, memo } from 'react';
+import { useState, useRef, useCallback, useEffect, memo } from 'react';
 import { motion, useScroll, useTransform } from 'framer-motion';
-import { ChevronDown, Award, Trophy, Users } from 'lucide-react';
+import { ChevronDown } from 'lucide-react';
 import logoImage from '@assets/74f914656c0a924cde5ec3bef5c1603a1193e836.png';
 import { OptimizedCanvas } from '@/components/UI/OptimizedCanvas';
 

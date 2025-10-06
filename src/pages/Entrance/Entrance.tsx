@@ -3,7 +3,7 @@ import { LogIn } from 'lucide-react';
 import React, { useState } from 'react'
 import { Outlet, useNavigate } from 'react-router-dom'
 import NavigationLogo from '@/components/NavigationLogo';
-import { useTypewriter } from 'react-simple-typewriter';
+import { Cursor, useTypewriter } from 'react-simple-typewriter';
 
 const navItems = [
   {
@@ -109,7 +109,7 @@ const Entrance: React.FC = () => {
       </nav>
 
       {/* Entrance Overlay */}
-      {/* {showEntrance && (
+      {showEntrance && (
         <div className='fixed inset-0 z-50 flex items-center justify-center bg-black/10 backdrop-blur-xl'>
           <div className='relative w-full flex items-center z-90 justify-center h-screen p-8 bg-white/10 backdrop-blur-md'>
 
@@ -124,7 +124,7 @@ const Entrance: React.FC = () => {
             <div className='absolute bottom-4 left-4 w-6 h-6 bg-gradient-to-br from-purple-400/30 to-pink-400/30 rounded-full blur-sm'></div>
           </div>
         </div>
-      )} */}
+      )}
     </>
   )
 }
