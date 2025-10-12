@@ -1,3 +1,4 @@
+import Lanyard from '@/ThreeJS/Book/Lanyard/Lanyard'
 import React from 'react'
 
 const Management: React.FC = () => {
@@ -6,7 +7,7 @@ const Management: React.FC = () => {
       <div className='max-w-[80%] mx-auto'>
         {/* Content */}
         <div>
-          Management
+          <Lanyard/>
         </div>
       </div>
     </>

@@ -2,6 +2,7 @@ import React from 'react'
 import { createBrowserRouter, RouterProvider } from 'react-router-dom'
 import { Achievements, Entrance, Home, Management, OurTeam } from "@/pages"
 import ErrorPageHandling from './pages/ErrorPageHandling/ErrorPageHandling'
+import Lanyard from './ThreeJS/Book/Lanyard/Lanyard'
 
 const App: React.FC = () => {
 
