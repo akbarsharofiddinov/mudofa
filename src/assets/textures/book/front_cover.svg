@@ -1,0 +1,94 @@
+<!-- save as: cover_front_uz_heritage.svg (2048x3072) -->
+<svg xmlns="http://www.w3.org/2000/svg" width="2048" height="3072" viewBox="0 0 2048 3072">
+  <defs>
+    <!-- Night blue gradient -->
+    <linearGradient id="bg" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#0b1023"></stop>
+      <stop offset="100%" stop-color="#050914"></stop>
+    </linearGradient>
+
+    <!-- Subtle center glow -->
+    <radialGradient id="glow" cx="50%" cy="40%" r="60%">
+      <stop offset="0%" stop-color="#1a2b5f" stop-opacity="0.35"></stop>
+      <stop offset="100%" stop-color="#000" stop-opacity="0"></stop>
+    </radialGradient>
+
+    <!-- Gold -->
+    <linearGradient id="gold" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#f5d37a"></stop>
+      <stop offset="50%" stop-color="#c9a24f"></stop>
+      <stop offset="100%" stop-color="#ffeb9a"></stop>
+    </linearGradient>
+
+    <!-- 8-point star -->
+    <symbol id="star8" viewBox="-50 -50 100 100">
+      <path d="M0,-50 12,-12 50,0 12,12 0,50 -12,12 -50,0 -12,-12 Z" fill="url(#gold)"></path>
+    </symbol>
+
+    <!-- Crescent (hilol) -->
+    <symbol id="crescent" viewBox="-60 -60 120 120">
+      <circle r="52" fill="url(#gold)"></circle>
+      <circle r="40" cx="16" fill="#0b1023"></circle>
+    </symbol>
+
+    <!-- Border pattern -->
+    <pattern id="goldBorder" width="32" height="32" patternUnits="userSpaceOnUse">
+      <rect width="32" height="32" fill="none"></rect>
+      <circle cx="16" cy="16" r="3" fill="url(#gold)"></circle>
+      <path d="M0,16 H32" stroke="url(#gold)" stroke-width="1" opacity="0.35"></path>
+    </pattern>
+  </defs>
+
+  <!-- Background -->
+  <rect width="2048" height="3072" fill="url(#bg)"></rect>
+  <rect width="2048" height="3072" fill="url(#glow)"></rect>
+
+  <!-- Double border -->
+  <rect x="64" y="64" width="1920" height="2944" rx="28" ry="28" fill="none" stroke="url(#gold)" stroke-width="5"></rect>
+  <rect x="90" y="90" width="1864" height="2890" rx="24" ry="24" fill="none" stroke="url(#gold)" stroke-width="2"></rect>
+  <rect x="110" y="110" width="1824" height="2850" rx="18" ry="18" fill="url(#goldBorder)" opacity="0.45"></rect>
+
+  <!-- Top: crescent + 12 stars -->
+  <g transform="translate(1024,340)">
+    <use href="#crescent" transform="scale(1.2)"></use>
+    <g fill="url(#gold)">
+      <!-- 12 stars circular -->
+      <g>
+        <!-- place stars around a ring -->
+        <g id="ring">
+          <use href="#star8" transform="translate(0,-140) scale(0.35)"></use>
+        </g>
+        <!-- duplicate around circle -->
+        <g>
+          <!-- 12 copies -->
+          <use href="#star8" transform="rotate(30) translate(0,-140) scale(0.35)"></use>
+          <use href="#star8" transform="rotate(60) translate(0,-140) scale(0.35)"></use>
+          <use href="#star8" transform="rotate(90) translate(0,-140) scale(0.35)"></use>
+          <use href="#star8" transform="rotate(120) translate(0,-140) scale(0.35)"></use>
+          <use href="#star8" transform="rotate(150) translate(0,-140) scale(0.35)"></use>
+          <use href="#star8" transform="rotate(180) translate(0,-140) scale(0.35)"></use>
+          <use href="#star8" transform="rotate(210) translate(0,-140) scale(0.35)"></use>
+          <use href="#star8" transform="rotate(240) translate(0,-140) scale(0.35)"></use>
+          <use href="#star8" transform="rotate(270) translate(0,-140) scale(0.35)"></use>
+          <use href="#star8" transform="rotate(300) translate(0,-140) scale(0.35)"></use>
+          <use href="#star8" transform="rotate(330) translate(0,-140) scale(0.35)"></use>
+        </g>
+      </g>
+    </g>
+  </g>
+
+  <!-- Center medallion (geometric rosette) -->
+  <g transform="translate(1024,1600) scale(6)">
+    <polygon points="0,-18 6,-6 18,0 6,6 0,18 -6,6 -18,0 -6,-6" fill="none" stroke="url(#gold)" stroke-width="1.2"></polygon>
+    <circle r="10" fill="none" stroke="url(#gold)" stroke-width="1"></circle>
+    <circle r="2.5" fill="url(#gold)"></circle>
+  </g>
+
+  <!-- Title (gold, optional – xohlasangiz o‘chirasiz) -->
+  <text x="50%" y="2280" font-family="Inter,Segoe UI,Arial" font-weight="800" font-size="124" text-anchor="middle" fill="url(#gold)">
+    ERISHILGAN YUTUQLAR
+  </text>
+  <text x="50%" y="2370" font-family="Inter,Segoe UI,Arial" font-weight="300" font-style="italic" font-size="64" text-anchor="middle" fill="#bfa463">
+    O‘ZBEKISTON SPORTI
+  </text>
+</svg>

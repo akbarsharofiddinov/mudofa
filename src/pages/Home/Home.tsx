@@ -221,12 +221,12 @@ const Home: React.FC = () => {
                 transition={{ delay: 0.5, duration: 0.8 }}
                 className="space-y-2 sm:space-y-3 lg:space-y-4"
               >
-                <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-light text-white/95">
+                <h1 className="text-xl sm:text-2xl md:text-3xl lg:text-4xl xl:text-5xl font-light text-white/95">
                   <span className="bg-gradient-to-r from-slate-200 via-white to-slate-100 bg-clip-text text-transparent tracking-wide">
                     O'zbekiston Respublikasi
                   </span>
                 </h1>
-                <h2 className="text-xl sm:text-2xl md:text-3xl lg:text-4xl font-normal text-white/80 tracking-wide">
+                <h2 className="text-lg sm:text-xl md:text-2xl lg:text-3xl font-normal text-white/80 tracking-wide">
                   Mudofa Vazirligi Sport Markazi
                 </h2>
               </motion.div>
