@@ -48,11 +48,9 @@ export default function EnhancedTimelineNav({
 
   return (
     <nav
-      role="navigation"
-      aria-label="Timeline navigation"
       className={[
         "fixed inset-x-0 bottom-0 z-90 w-full",
-        "py-4 md:py-5 lg:py-6 pb-[env(safe-area-inset-bottom)]",
+        "py-4 md:py-5 lg:py-6]",
         className ?? "",
       ].join(" ")}
     >
@@ -69,13 +67,43 @@ export default function EnhancedTimelineNav({
           className="absolute left-0 right-0 top-1/2 -translate-y-1/2 h-px z-0"
         />
 
-        <ul className="relative z-10 flex items-center navbar-menu">
+        <ul className="relative z-10 flex items-center justify-center gap-6 min-h-[80px]">
           {items.map((item, idx) => {
             const isActive = active === item.link;
             return (
               <React.Fragment key={item.link}>
                 {/* MAIN ITEM */}
-                <li className="shrink-0 first:translate-x-[5px]">
+                <li className="first:translate-x-[5px] relative min-w-[130px] flex items-center justify-center">
+
+                  {/* MINI-DOTS BETWEEN (not after last) */}
+                  {idx < items.length - 1 && (
+                    <div className={[
+                      "absolute top-0 left-[50%] flex items-center gap-2 translate-x-[10px] first:translate-x-[18px]",
+                      // `${idx === 0 && "translate-x-[18px]"}`,
+                      // `${idx === 1 && ""}`,
+                      // `${idx === 2 && "translate-x-[15px]"}`,
+                      // `${idx === 3 && "translate-x-[15px]"}`,
+                      // `${idx === 4 && "translate-x-[15px]"}`,
+                      // `${idx === items.length - 2 && "translate-x-[10px]"}`
+                    ].join(" ")}>
+                      {Array.from({
+                        length: idx === 0 ? betweenDots + 2
+                          : idx === 1 ? betweenDots + 3
+                            : idx === 2 ? betweenDots + 3
+                              : idx === 3 ? betweenDots + 3
+                                : idx === 4 ? betweenDots + 3
+                                  : idx === 5 ? betweenDots + 3
+                                    : idx === items.length - 2 ? betweenDots + 4
+                                      : betweenDots
+                      }).map((_, i) => (
+                        <span
+                          key={i}
+                          className="inline-block size-[4px] rounded-full bg-yellow-300/40"
+                        />
+                      ))}
+                    </div>
+                  )}
+
                   <button
                     type="button"
                     onClick={() => go(item.link)}
@@ -109,36 +137,7 @@ export default function EnhancedTimelineNav({
                   </button>
                 </li>
 
-                {/* MINI-DOTS BETWEEN (not after last) */}
-                {idx < items.length - 1 && (
-                  <li
-                    aria-hidden
-                    className="flex-1 flex items-center justify-center gap-2 px-1 sm:px-2"
-                  >
-                    <div className={[
-                      "absolute top-0 flex items-center gap-2",
-                      `${idx === 1 && "translate-x-[6px]"}`,
-                      `${idx === 2 && "translate-x-[-10px]"}`,
-                      `${idx === 3 && "translate-x-[10px]"}`,
-                      `${idx === 4 && "translate-x-[-10px]"}`,
-                      `${idx === items.length - 2 && "translate-x-[10px]"}`
-                    ].join(" ")}>
-                      {Array.from({
-                        length: idx === 1 ? betweenDots + 1
-                          : idx === 2 ? betweenDots + 1
-                            : idx === 3 ? betweenDots + 1
-                              : idx === 4 ? betweenDots + 1
-                                : idx === items.length - 2 ? betweenDots + 2
-                                  : betweenDots
-                      }).map((_, i) => (
-                        <span
-                          key={i}
-                          className="inline-block size-[4px] rounded-full bg-yellow-300/40"
-                        />
-                      ))}
-                    </div>
-                  </li>
-                )}
+
               </React.Fragment>
             );
           })}
