@@ -243,7 +243,8 @@ body {
 /* custom.css */
 
 .ant-checkbox-checked .ant-checkbox-inner {
-  background-color: #2563eb !important; /* bg-blue-600 */
+  background-color: #2563eb !important;
+  /* bg-blue-600 */
   border-color: #2563eb !important;
 }
 
@@ -252,7 +253,8 @@ body {
 }
 
 .ant-checkbox-inner {
-  border-color: #00000042 !important; /* border-gray-600 */
+  border-color: #00000042 !important;
+  /* border-gray-600 */
 }
 
 .ant-switch {
@@ -272,10 +274,18 @@ body {
   width: auto !important;
 }
 
+
 .MuiAccordionSummary-expandIconWrapper {
   position: absolute;
   left: 105%;
 }
+
+/* .MuiAccordionSummary-expandIconWrapper {
+  position: absolute;
+  left: auto;
+  right: 0;
+  transform: none;
+} */
 
 .MuiPaper-root {
   box-shadow: none !important;
@@ -289,46 +299,53 @@ body {
 
 /* Custom animations for the logo */
 @keyframes logoGlow {
+
   0%,
   100% {
-    filter: drop-shadow(0 0 200px rgba(255, 165, 0, 0.8))
-      drop-shadow(0 0 400px rgba(255, 215, 0, 0.6));
+    filter: drop-shadow(0 0 200px rgba(255, 165, 0, 0.8)) drop-shadow(0 0 400px rgba(255, 215, 0, 0.6));
   }
+
   50% {
-    filter: drop-shadow(0 0 300px rgba(255, 165, 0, 1))
-      drop-shadow(0 0 600px rgba(255, 215, 0, 0.8));
+    filter: drop-shadow(0 0 300px rgba(255, 165, 0, 1)) drop-shadow(0 0 600px rgba(255, 215, 0, 0.8));
   }
 }
 
 @keyframes logoFloat {
+
   0%,
   100% {
     transform: translateY(0px) rotate(0deg);
   }
+
   25% {
     transform: translateY(-10px) rotate(1deg);
   }
+
   75% {
     transform: translateY(5px) rotate(-1deg);
   }
 }
 
 @keyframes logoBreath {
+
   0%,
   100% {
     transform: scale(1);
   }
+
   50% {
     transform: scale(1.05);
   }
 }
 
 @keyframes auralGlow {
+
   0%,
   100% {
     box-shadow: 0 0 20px rgba(255, 165, 0, 0.3), 0 0 40px rgba(255, 215, 0, 0.2),
       0 0 80px rgba(255, 140, 0, 0.1);
   }
+
   50% {
     box-shadow: 0 0 40px rgba(255, 165, 0, 0.6), 0 0 80px rgba(255, 215, 0, 0.4),
       0 0 120px rgba(255, 140, 0, 0.2);
@@ -336,11 +353,13 @@ body {
 }
 
 @keyframes sparkle {
+
   0%,
   100% {
     opacity: 0.4;
     transform: scale(0.8);
   }
+
   50% {
     opacity: 1;
     transform: scale(1.2);
@@ -370,15 +389,11 @@ body {
 
 /* Enhanced glow effects */
 .enhanced-glow {
-  filter: drop-shadow(0 0 10px rgba(255, 165, 0, 0.8))
-    drop-shadow(0 0 20px rgba(255, 215, 0, 0.6))
-    drop-shadow(0 0 40px rgba(255, 140, 0, 0.4));
+  filter: drop-shadow(0 0 10px rgba(255, 165, 0, 0.8)) drop-shadow(0 0 20px rgba(255, 215, 0, 0.6)) drop-shadow(0 0 40px rgba(255, 140, 0, 0.4));
 }
 
 .super-glow {
-  filter: drop-shadow(0 0 20px rgba(255, 165, 0, 1))
-    drop-shadow(0 0 40px rgba(255, 215, 0, 0.8))
-    drop-shadow(0 0 80px rgba(255, 140, 0, 0.6));
+  filter: drop-shadow(0 0 20px rgba(255, 165, 0, 1)) drop-shadow(0 0 40px rgba(255, 215, 0, 0.8)) drop-shadow(0 0 80px rgba(255, 140, 0, 0.6));
 }
 
 .sphere-root {
@@ -389,9 +404,12 @@ body {
   --rot-x: calc((360deg / var(--segments-y)) / 2);
   --item-width: calc(var(--circ) / var(--segments-x));
   --item-height: calc(var(--circ) / var(--segments-y));
-  --tile-scale-x: 1; /* overwritten from props */
-  --tile-scale-y: 1; /* overwritten from props */
-  --tile-inset: 10px; /* overwritten from props */
+  --tile-scale-x: 1;
+  /* overwritten from props */
+  --tile-scale-y: 1;
+  /* overwritten from props */
+  --tile-inset: 10px;
+  /* overwritten from props */
 }
 
 .sphere-item {
@@ -418,18 +436,68 @@ body {
 
 /* In your main CSS file, e.g., styles.css */
 .custom-scrollbar::-webkit-scrollbar {
-  width: 4px; /* Or use @apply w-2.5 */
+  width: 4px;
+  /* Or use @apply w-2.5 */
 }
 
 .custom-scrollbar::-webkit-scrollbar-track {
-  background-color: #9b9b9b; /* Or use @apply bg-gray-100 */
+  background-color: #9b9b9b;
+  /* Or use @apply bg-gray-100 */
 }
 
 .custom-scrollbar::-webkit-scrollbar-thumb {
-  background-color: #424242; /* Or use @apply bg-gray-500 */
-  border-radius: 5px; /* Or use @apply rounded-md */
+  background-color: #424242;
+  /* Or use @apply bg-gray-500 */
+  border-radius: 5px;
+  /* Or use @apply rounded-md */
 }
 
 .custom-scrollbar::-webkit-scrollbar-thumb:hover {
-  background-color: #555; /* Or use @apply bg-gray-700 */
+  background-color: #555;
+  /* Or use @apply bg-gray-700 */
+}
+
+#root {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 2rem;
+  text-align: center;
+}
+
+.logo {
+  height: 6em;
+  padding: 1.5em;
+  will-change: filter;
+}
+
+.logo:hover {
+  filter: drop-shadow(0 0 2em #646cffaa);
+}
+
+.logo.react:hover {
+  filter: drop-shadow(0 0 2em #61dafbaa);
+}
+
+@keyframes logo-spin {
+  from {
+    transform: rotate(0deg);
+  }
+
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  a:nth-of-type(2) .logo {
+    animation: logo-spin infinite 20s linear;
+  }
+}
+
+.card {
+  padding: 2em;
+}
+
+.read-the-docs {
+  color: #888;
 }
