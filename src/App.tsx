@@ -1,7 +1,9 @@
-import React from 'react'
+import React, { Suspense } from 'react'
 import { createBrowserRouter, RouterProvider } from 'react-router-dom'
 import { Achievements, Entrance, Home, Management, OurTeam } from "@/pages"
 import ErrorPageHandling from './pages/ErrorPageHandling/ErrorPageHandling'
+import { Canvas } from '@react-three/fiber'
+import { HorseModel } from './ThreeJS'
 
 const App: React.FC = () => {
 
@@ -42,6 +44,9 @@ const App: React.FC = () => {
   return (
     <>
       <RouterProvider router={routes} />
+      {/* <div className='w-full h-screen'>
+        <HorseModel />
+      </div> */}
     </>
   )
 }

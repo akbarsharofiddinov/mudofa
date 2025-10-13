@@ -226,7 +226,7 @@ const Home: React.FC = () => {
                     O'zbekiston Respublikasi
                   </span>
                 </h1>
-                <h2 className="text-lg sm:text-xl md:text-2xl lg:text-3xl font-normal text-white/80 tracking-wide">
+                <h2 className="text-sm sm:text-xl md:text-2xl lg:text-3xl font-normal text-white/80 tracking-wide">
                   Mudofa Vazirligi Sport Markazi
                 </h2>
               </motion.div>
