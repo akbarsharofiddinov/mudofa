@@ -4,8 +4,10 @@ import React, { useState } from 'react'
 import { Outlet } from 'react-router-dom'
 import NavigationLogo from '@/components/NavigationLogo';
 import { Cursor, useTypewriter } from 'react-simple-typewriter';
-import LightRays from '@/components/UI/LaytRay';
+import LightRays from '@/components/UI/LightRay';
 import EnhancedTimelineNav from '@/EnhancedTimelineNav';
+import { Input } from 'antd';
+import { HorseModel } from '@/ThreeJS';
 
 const navItems = [
   { label: "Rahbariyat", link: "management" },
@@ -19,7 +21,8 @@ const navItems = [
 ];
 
 const Entrance: React.FC = () => {
-  const [showEntrance, setShowEntrance] = useState(false)
+  const [showEntrance, setShowEntrance] = useState(false);
+  const [xCoordinate, setXCoordinate] = useState(-16);
   const text = useTypewriter({
     words: ["O’zbekiston Respublikasi Mudofa Vazirligi Sport Markazi"],
     loop: 1,
@@ -35,25 +38,41 @@ const Entrance: React.FC = () => {
 
   return (
     <>
+
+      <div>
+        <p>
+          X: {xCoordinate.toFixed(2)}
+          Y: {0}
+          Z: {0}
+        </p>
+      </div>
+
+      {location.pathname === '/' && (
+        <div className='absolute inset-0 z-[80]'>
+          <HorseModel xCoordinate={xCoordinate} setXCoordinate={setXCoordinate} />
+        </div>
+      )}
+
       <main className={`w-full h-screen transition-all duration-500`}>
         <NavigationLogo />
         <Outlet />
 
-        {/* Log in button */}
-        <button className="flex items-center flex-row-reverse gap-2 fixed top-4 right-4 z-90">
+        <div className='flex items-center gap-2 fixed top-4 right-4 z-90'>
+          <Input placeholder="Qidirish" className='rounded-full bg-white/20 backdrop-blur-sm border-0 text-white placeholder:text-white focus:border-0 focus:ring-0 max-w-[100px] h-10' />
 
-          <ShinyText>
+          {/* Log in button */}
+          <ShinyText className='h-10'>
             <div className='flex items-center gap-2 text-white text-[14px]'>
-              <LogIn size={20} /> Kirish
+              <LogIn size={18} /> Kirish
             </div>
           </ShinyText>
-        </button>
+        </div>
 
       </main>
 
       {!showEntrance && (
         <>
-          < EnhancedTimelineNav items={navItems} betweenDots={8} />
+          < EnhancedTimelineNav items={navItems} betweenDots={8} xCoordinate={xCoordinate} />
         </>
       )}
 

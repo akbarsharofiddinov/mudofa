@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 
 export type NavItem = { label: string; link: string };
 
@@ -8,39 +8,27 @@ interface Props {
   className?: string;
   /** How many mini-dots to render between each main item */
   betweenDots?: number; // default 8
+  xCoordinate?: number;
 }
 
 export default function EnhancedTimelineNav({
   items,
   className,
   betweenDots = 8,
+  xCoordinate
 }: Props) {
   const [active, setActive] = useState<string | null>(null);
+  const location = useLocation();
 
   // Scroll-spy: highlight section mostly in view
   useEffect(() => {
-    const sections = items
-      .map((i) => document.getElementById(i.link))
-      .filter(Boolean) as HTMLElement[];
-    if (!sections.length) return;
+    setActive(location.pathname.split("/")[1] || "/");
+    if (xCoordinate! >= -16 && xCoordinate! <= -10) {
+      setActive("management")
+    }
+  }, [location, xCoordinate]);
 
-    const io = new IntersectionObserver(
-      (entries) => {
-        const best = entries
-          .filter((e) => e.isIntersecting)
-          .sort((a, b) => b.intersectionRatio - a.intersectionRatio)[0];
-        if (best?.target?.id) setActive(best.target.id);
-      },
-      { threshold: [0.25, 0.6, 0.9] }
-    );
-    sections.forEach((s) => io.observe(s));
-    return () => {
-      sections.forEach((s) => io.unobserve(s));
-      io.disconnect();
-    };
-  }, [items]);
-
-  const navigate = useNavigate()
+  const navigate = useNavigate();
 
   const go = (link: string) => {
     navigate(link)
@@ -68,18 +56,18 @@ export default function EnhancedTimelineNav({
           className="absolute left-0 right-0 top-1/2 -translate-y-1/2 h-px z-0"
         />
 
-        <ul className="relative z-10 flex items-center justify-center gap-6 min-h-[80px]">
+        <ul className="relative z-10 flex items-center justify-center gap-6">
           {items.map((item, idx) => {
             const isActive = active === item.link;
             return (
               <React.Fragment key={item.link}>
                 {/* MAIN ITEM */}
-                <li className="first:translate-x-[5px] relative min-w-[130px] flex items-center justify-center">
+                <li className="first:translate-x-[5px] relative min-w-[130px] flex items-center justify-center min-h-[80px]">
 
                   {/* MINI-DOTS BETWEEN (not after last) */}
                   {idx < items.length - 1 && (
                     <div className={[
-                      "absolute top-0 left-[50%] flex items-center gap-2 translate-x-[10px] first:translate-x-[18px]",
+                      "absolute top-[25%] left-[50%] flex items-center gap-2 translate-x-[10px] translate-y-[5px] first:translate-x-[18px]",
                       // `${idx === 0 && "translate-x-[18px]"}`,
                       // `${idx === 1 && ""}`,
                       // `${idx === 2 && "translate-x-[15px]"}`,
@@ -108,7 +96,7 @@ export default function EnhancedTimelineNav({
                   <button
                     type="button"
                     onClick={() => go(item.link)}
-                    className="group relative mx-1 sm:mx-1 flex flex-col items-center justify-center px-1"
+                    className="group mx-1 sm:mx-1 flex flex-col items-center justify-center px-1"
                     aria-current={isActive ? "page" : undefined}
                   >
                     {/* Big dot */}
@@ -116,7 +104,7 @@ export default function EnhancedTimelineNav({
                       className={[
                         "mb-2 inline-block size-[6px] rounded-full transition-all duration-300",
                         isActive
-                          ? "bg-yellow-400 scale-150 shadow-[0_0_14px_rgba(234,179,8,0.85)]"
+                          ? "bg-yellow-400 scale-150 shadow-[0_0_10px_rgba(234,179,8,0.6)]"
                           : "bg-yellow-400/70 group-hover:bg-yellow-400 group-hover:scale-150 group-hover:shadow-[0_0_10px_rgba(234,179,8,0.6)]",
                       ].join(" ")}
                     />
@@ -133,8 +121,13 @@ export default function EnhancedTimelineNav({
                       {item.label}
                     </span>
 
-                    {/* Hover halo */}
-                    <span className="pointer-events-none absolute inset-0 rounded-lg opacity-0 group-hover:opacity-20 transition-opacity duration-300 bg-yellow-400" />
+
+                    <span className={[
+                      "absolute inset-0 rounded-lg opacity-0 bg-gradient-to-b from-[#FFAA00] to-transparent",
+                      // "after:content-[''] after:absolute after:inset-0 after:rounded-lg after:bg-gradient-to-b after:from-[#FFAA00] after:to-transparent after:transform [transform:perspective(2em)_rotateX(30deg)] blur-[2px]",
+                      `transition-opacity duration-300 ${isActive ? "opacity-20" : "group-hover:opacity-20"}`,
+                      "pointer-events-none"
+                    ].join(" ")} />
                   </button>
                 </li>
 

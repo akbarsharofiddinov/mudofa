@@ -1,10 +1,15 @@
-import { Suspense, useEffect, useRef, useState, type JSX } from "react";
+import { Suspense, useEffect, useRef, type JSX } from "react";
 import { Canvas } from "@react-three/fiber";
 import { Environment, OrbitControls, ContactShadows, useGLTF, Center, useAnimations } from "@react-three/drei";
 import { Group } from "three";
 import * as THREE from "three"
 
 import horseUrl from "@/assets/models/horse.glb?url";
+
+interface IProps {
+  xCoordinate: number;
+  setXCoordinate: React.Dispatch<React.SetStateAction<number>>;
+}
 
 const MODEL_URL = horseUrl;
 
@@ -18,7 +23,7 @@ function HorseModel(props: JSX.IntrinsicElements["group"]) {
     const firstAction = Object.values(actions)[0];
     if (firstAction) {
       firstAction.play();
-      firstAction.timeScale = 1.5;
+      firstAction.timeScale = 1;
     }
 
     // ✅ Har bir meshga gologramma materiali qo‘llash
@@ -26,7 +31,7 @@ function HorseModel(props: JSX.IntrinsicElements["group"]) {
       if ((obj as THREE.Mesh).isMesh) {
         const mesh = obj as THREE.Mesh;
         mesh.material = new THREE.MeshBasicMaterial({
-          color: new THREE.Color(0x003fff), // neon ko‘k
+          color: new THREE.Color(0xff77700),
           transparent: true,
           opacity: 0.2,
           wireframe: true, // to‘rli ko‘rinish
@@ -50,14 +55,13 @@ function HorseModel(props: JSX.IntrinsicElements["group"]) {
 
 useGLTF.preload(MODEL_URL);
 
-const Horse: React.FC = () => {
-  const [xCoordinate, setXCoordinate] = useState(-22);
+const Horse: React.FC<IProps> = ({ xCoordinate, setXCoordinate }) => {
 
   useEffect(() => {
     setTimeout(() => {
-      setXCoordinate((prev) => (prev >= 22 ? -22 : prev + 0.1));
+      setXCoordinate((prev) => (prev >= 22 ? -22 : prev + 0.08));
     }, 10);
-  }, [xCoordinate])
+  }, [xCoordinate, setXCoordinate]);
 
   return (
     <>
@@ -65,7 +69,7 @@ const Horse: React.FC = () => {
         <Suspense fallback={null}>
           <ambientLight intensity={0.5} />
           {/* <axesHelper args={[5]} /> */}
-          <group position={[xCoordinate, -4, 0]} rotation={[0, 0, 0]}>
+          <group position={[xCoordinate, -3, 0]} rotation={[0, 0, 0]}>
             <Center>
               <HorseModel />
             </Center>
