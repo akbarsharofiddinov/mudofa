@@ -6,7 +6,6 @@ import NavigationLogo from '@/components/NavigationLogo';
 import { Cursor, useTypewriter } from 'react-simple-typewriter';
 import LightRays from '@/components/UI/LaytRay';
 import EnhancedTimelineNav from '@/EnhancedTimelineNav';
-import { HorseModel } from '@/ThreeJS';
 
 const navItems = [
   { label: "Rahbariyat", link: "management" },
@@ -36,10 +35,6 @@ const Entrance: React.FC = () => {
 
   return (
     <>
-      <div className='absolute inset-0 z-[999]'>
-        <HorseModel />
-      </div>
-
       <main className={`w-full h-screen transition-all duration-500`}>
         <NavigationLogo />
         <Outlet />

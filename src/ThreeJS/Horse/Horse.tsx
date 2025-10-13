@@ -54,9 +54,8 @@ const Horse: React.FC = () => {
   const [xCoordinate, setXCoordinate] = useState(-22);
 
   useEffect(() => {
-    if (xCoordinate > 22) {
-      setXCoordinate(-22)
-    } else {
+    if (xCoordinate <= 24) {
+
       setTimeout(() => {
         setXCoordinate(prev => prev + .1)
       }, 10);

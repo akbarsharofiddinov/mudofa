@@ -3,6 +3,7 @@ import { motion, useMotionValue, useSpring } from 'framer-motion';
 import logoImage from '@/assets/mudofaLogo.png';
 import { OptimizedCanvas } from '@/components/UI/OptimizedCanvas';
 import Galaxy from '@/Motion/ReactBits/Galaxy';
+import { HorseModel } from '@/ThreeJS';
 
 const Home: React.FC = () => {
   const containerRef = useRef<HTMLDivElement>(null);
@@ -58,6 +59,9 @@ const Home: React.FC = () => {
 
   return (
     <>
+      <div className='absolute inset-0 z-[80]'>
+        <HorseModel />
+      </div>
       {/* Optimized Background Effects - Only on Home */}
       <div className='fixed inset-0 z-90 opacity-20'>
         <Galaxy
