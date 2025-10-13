@@ -50,7 +50,8 @@ export default function EnhancedTimelineNav({
     <nav
       className={[
         "fixed inset-x-0 bottom-0 z-90 w-full",
-        "py-4 md:py-5 lg:py-6]",
+        "pb-4 pt-2 md:pb-3 md:pt-0 lg:pb-6 lg:pt-4]",
+        "bg-black/10 backdrop-blur-sm border-t border-white/10",
         className ?? "",
       ].join(" ")}
     >

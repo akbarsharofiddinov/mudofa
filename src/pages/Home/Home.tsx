@@ -103,7 +103,7 @@ const Home: React.FC = () => {
             >
               {/* 3D Logo Container */}
               <motion.div
-                className="relative mx-auto w-32 h-32 sm:w-40 sm:h-40 md:w-48 md:h-48 lg:w-64 lg:h-64 mb-8 sm:mb-12"
+                className="relative flex items-center justify-center mx-auto w-32 h-32 sm:w-40 sm:h-40 md:w-48 md:h-48 lg:w-64 lg:h-64 mb-8 sm:mb-12"
                 initial={{ rotateY: 0, opacity: 0 }}
                 animate={{ rotateY: 360, opacity: 1 }}
                 transition={{
@@ -141,7 +141,7 @@ const Home: React.FC = () => {
                           : 'border-yellow-500/40'
                         }`}
                       style={{
-                        transform: `scale(${1 + ring * 0.12}) rotateX(${ring * 25}deg)`,
+                        transform: `scale(${1 + ring * 0.05}) rotateX(${ring * 25}deg)`,
                       }}
                     />
                   </motion.div>
@@ -149,7 +149,7 @@ const Home: React.FC = () => {
 
                 {/* Logo with 3D effect */}
                 <motion.div
-                  className="relative rounded-full overflow-hidden border-4 border-white/20 shadow-2xl shadow-purple-500/50 m-5 z-10"
+                  className="relative rounded-full overflow-hidden border-4 border-white/20 shadow-2xl shadow-purple-500/50 m-10 z-10"
                   initial={{ scale: 0 }}
                   animate={{
                     scale: 1,
@@ -168,7 +168,7 @@ const Home: React.FC = () => {
                   <img
                     src={logoImage}
                     alt="Mudofaa Vazirligi Sport Markazi Logo"
-                    className="w-full h-full object-cover"
+                    className="object-cover w-full h-full"
                     onError={(e) => {
                       console.error('Logo image failed to load:', e);
                       (e.target as HTMLImageElement).style.display = 'none';
@@ -223,14 +223,14 @@ const Home: React.FC = () => {
                 initial={{ opacity: 0, y: 50 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: 0.5, duration: 0.8 }}
-                className="space-y-2 sm:space-y-3 lg:space-y-4"
+                className="space-y-2 sm:space-y-3 lg:space-y-4 mb-20"
               >
-                <h1 className="text-xl sm:text-2xl md:text-3xl lg:text-4xl xl:text-5xl font-light text-white/95">
+                <h1 className="text-md sm:text-xl md:text-2xl lg:text-3xl xl:text-4xl font-light text-white/95">
                   <span className="bg-gradient-to-r from-slate-200 via-white to-slate-100 bg-clip-text text-transparent tracking-wide">
                     O'zbekiston Respublikasi
                   </span>
                 </h1>
-                <h2 className="text-sm sm:text-xl md:text-2xl lg:text-3xl font-normal text-white/80 tracking-wide">
+                <h2 className="text-sm sm:text-md md:text-xl lg:text-2xl font-normal text-white/80 tracking-wide">
                   Mudofa Vazirligi Sport Markazi
                 </h2>
               </motion.div>

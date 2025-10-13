@@ -54,12 +54,9 @@ const Horse: React.FC = () => {
   const [xCoordinate, setXCoordinate] = useState(-22);
 
   useEffect(() => {
-    if (xCoordinate <= 24) {
-
-      setTimeout(() => {
-        setXCoordinate(prev => prev + .1)
-      }, 10);
-    }
+    setTimeout(() => {
+      setXCoordinate((prev) => (prev >= 22 ? -22 : prev + 0.1));
+    }, 10);
   }, [xCoordinate])
 
   return (
@@ -68,7 +65,7 @@ const Horse: React.FC = () => {
         <Suspense fallback={null}>
           <ambientLight intensity={0.5} />
           {/* <axesHelper args={[5]} /> */}
-          <group position={[xCoordinate, -5, 0]} rotation={[0, 0, 0]}>
+          <group position={[xCoordinate, -4, 0]} rotation={[0, 0, 0]}>
             <Center>
               <HorseModel />
             </Center>
