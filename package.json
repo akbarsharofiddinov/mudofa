@@ -15,6 +15,7 @@
     "@react-three/fiber": "^9.3.0",
     "@react-three/rapier": "^2.1.0",
     "@use-gesture/react": "^10.3.1",
+    "axios": "^1.12.2",
     "antd": "^5.27.4",
     "framer-motion": "^12.23.22",
     "gl-matrix": "^3.4.4",
@@ -27,6 +28,7 @@
     "react-dom": "^19.1.1",
     "react-router-dom": "^7.9.3",
     "react-simple-typewriter": "^5.0.1",
+    "sass": "^1.93.2",
     "three": "^0.180.0"
   },
   "devDependencies": {
