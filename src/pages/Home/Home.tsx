@@ -3,6 +3,9 @@ import { motion, useMotionValue, useSpring } from 'framer-motion';
 import logoImage from '@/assets/mudofaLogo.png';
 import { OptimizedCanvas } from '@/components/UI/OptimizedCanvas';
 import Galaxy from '@/Motion/ReactBits/Galaxy';
+import { useAppSelector } from '@/store/hooks';
+import { Cursor } from 'react-simple-typewriter';
+import LightRays from '@/components/UI/LightRay';
 
 const Home: React.FC = () => {
   const containerRef = useRef<HTMLDivElement>(null);
@@ -37,6 +40,8 @@ const Home: React.FC = () => {
     });
   }, [mouseX, mouseY]);
 
+  const { horseAnimationFinished } = useAppSelector(state => state.infoSlice);
+
   useEffect(() => {
     const handleResize = () => {
       // Reset mouse position on resize
@@ -58,6 +63,35 @@ const Home: React.FC = () => {
 
   return (
     <>
+      {!horseAnimationFinished && (
+        <div className='fixed inset-0 z-50 flex items-center justify-center bg-black/10 backdrop-blur-xl'>
+
+          <div className='relative w-full flex items-center z-90 justify-center h-screen p-8 backdrop-blur-md'>
+            <LightRays raysOrigin="top-center"
+              raysColor="#00ffff"
+              raysSpeed={1.5}
+              lightSpread={0.8}
+              rayLength={1.2}
+              followMouse={true}
+              mouseInfluence={0.1}
+              noiseAmount={0.1}
+              distortion={0.05}
+              className="custom-rays h-screen" />
+
+            <div className='text-center absolute inset-0 flex flex-col justify-center items-center break-words text-white space-y-6'>
+
+              {/* <h1 className='text-7xl font-normal max-w-[1100px] bg-gradient-to-r from-blue-400 to-purple-400 bg-clip-text text-white'>
+                {text[0]}
+                <Cursor cursorStyle='|' />
+              </h1> */}
+            </div>
+
+            <div className='absolute top-4 right-4 w-8 h-8 bg-gradient-to-br from-blue-400/30 to-purple-400/30 rounded-full blur-sm'></div>
+            <div className='absolute bottom-4 left-4 w-6 h-6 bg-gradient-to-br from-purple-400/30 to-pink-400/30 rounded-full blur-sm'></div>
+          </div>
+        </div>
+      )}
+
       {/* Optimized Background Effects - Only on Home */}
       <div className='fixed inset-0 z-90 opacity-20'>
         <Galaxy
@@ -98,138 +132,143 @@ const Home: React.FC = () => {
               className="will-change-transform"
             >
               {/* 3D Logo Container */}
-              <motion.div
-                className="relative flex items-center justify-center mx-auto w-32 h-32 sm:w-40 sm:h-40 md:w-48 md:h-48 lg:w-64 lg:h-64 mb-8 sm:mb-12"
-                initial={{ rotateY: 0, opacity: 0 }}
-                animate={{ rotateY: 360, opacity: 1 }}
-                transition={{
-                  rotateY: { duration: 20, repeat: Infinity, ease: 'linear' },
-                  opacity: { duration: 1, delay: 0.2 }
-                }}
-                style={{
-                  transformStyle: 'preserve-3d',
-                  backfaceVisibility: 'visible',
-                  perspective: '1000px'
-                }}
-              >
-                {/* Optimized orbital rings */}
-                {[1, 2, 3].map((ring) => (
+              {horseAnimationFinished && (
+                <>
                   <motion.div
-                    key={ring}
-                    className="absolute inset-0 will-change-transform"
-                    animate={{
-                      rotateZ: ring % 2 === 0 ? 360 : -360,
-                    }}
+                    className="relative flex items-center justify-center mx-auto w-32 h-32 sm:w-40 sm:h-40 md:w-48 md:h-48 lg:w-64 lg:h-64 mb-8 sm:mb-12"
+                    initial={{ rotateY: 0, opacity: 0 }}
+                    animate={{ rotateY: 360, opacity: 1 }}
                     transition={{
-                      duration: 8 * ring,
-                      repeat: Infinity,
-                      ease: 'linear',
+                      rotateY: { duration: 20, repeat: Infinity, ease: 'linear' },
+                      opacity: { duration: 1, delay: 0.2 }
                     }}
                     style={{
                       transformStyle: 'preserve-3d',
+                      backfaceVisibility: 'visible',
+                      perspective: '1000px'
                     }}
                   >
-                    <div
-                      className={`absolute inset-0 rounded-full border-2 ${ring === 1
-                        ? 'border-[#00d4ff]/40'
-                        : ring === 2
-                          ? 'border-purple-500/40'
-                          : 'border-yellow-500/40'
-                        }`}
-                      style={{
-                        transform: `scale(${1 + ring * 0.05}) rotateX(${ring * 25}deg)`,
+                    {/* Optimized orbital rings */}
+                    {[1, 2, 3].map((ring) => (
+                      <motion.div
+                        key={ring}
+                        className="absolute inset-0 will-change-transform"
+                        animate={{
+                          rotateZ: ring % 2 === 0 ? 360 : -360,
+                        }}
+                        transition={{
+                          duration: 8 * ring,
+                          repeat: Infinity,
+                          ease: 'linear',
+                        }}
+                        style={{
+                          transformStyle: 'preserve-3d',
+                        }}
+                      >
+                        <div
+                          className={`absolute inset-0 rounded-full border-2 ${ring === 1
+                            ? 'border-[#00d4ff]/40'
+                            : ring === 2
+                              ? 'border-purple-500/40'
+                              : 'border-yellow-500/40'
+                            }`}
+                          style={{
+                            transform: `scale(${1 + ring * 0.05}) rotateX(${ring * 25}deg)`,
+                          }}
+                        />
+                      </motion.div>
+                    ))}
+
+                    {/* Logo with 3D effect */}
+                    <motion.div
+                      className="relative rounded-full overflow-hidden border-4 border-white/20 shadow-2xl shadow-purple-500/50 m-2 z-2"
+                      initial={{ scale: 0 }}
+                      animate={{
+                        scale: 1,
+                        boxShadow: [
+                          '0 0 40px rgba(124, 58, 237, 0.5)',
+                          '0 0 80px rgba(0, 212, 255, 0.5)',
+                          '0 0 40px rgba(251, 191, 36, 0.5)',
+                          '0 0 40px rgba(124, 58, 237, 0.5)',
+                        ],
+                      }}
+                      transition={{
+                        scale: { duration: 0.8, delay: 0.3 },
+                        boxShadow: { duration: 4, repeat: Infinity },
+                      }}
+                    >
+                      <img
+                        src={logoImage}
+                        alt="Mudofaa Vazirligi Sport Markazi Logo"
+                        className="object-cover w-full h-full"
+                        onError={(e) => {
+                          console.error('Logo image failed to load:', e);
+                          (e.target as HTMLImageElement).style.display = 'none';
+                        }}
+                        onLoad={() => {
+                          console.log('Logo image loaded successfully');
+                        }}
+                      />
+                    </motion.div>
+
+                    {/* Reduced particles around logo for better performance */}
+                    {[...Array(8)].map((_, i) => (
+                      <motion.div
+                        key={i}
+                        className="absolute w-2 h-2 rounded-full will-change-transform"
+                        style={{
+                          left: '50%',
+                          top: '50%',
+                          background: ['#00d4ff', '#7c3aed', '#fbbf24'][i % 3],
+                        }}
+                        animate={{
+                          x: Math.cos((i * Math.PI * 2) / 8) * 120,
+                          y: Math.sin((i * Math.PI * 2) / 8) * 120,
+                          scale: [0, 1, 0],
+                          opacity: [0, 0.8, 0],
+                        }}
+                        transition={{
+                          duration: 2.5,
+                          repeat: Infinity,
+                          delay: i * 0.15,
+                          ease: "easeInOut"
+                        }}
+                      />
+                    ))}
+
+                    {/* Glow effect */}
+                    <motion.div
+                      className="absolute inset-0 rounded-full bg-gradient-to-br from-[#00d4ff] via-purple-500 to-yellow-500 blur-3xl opacity-50"
+                      animate={{
+                        scale: [1, 1.5, 1],
+                        opacity: [0.3, 0.6, 0.3],
+                      }}
+                      transition={{
+                        duration: 3,
+                        repeat: Infinity,
                       }}
                     />
                   </motion.div>
-                ))}
 
-                {/* Logo with 3D effect */}
-                <motion.div
-                  className="relative rounded-full overflow-hidden border-4 border-white/20 shadow-2xl shadow-purple-500/50 m-10 z-10"
-                  initial={{ scale: 0 }}
-                  animate={{
-                    scale: 1,
-                    boxShadow: [
-                      '0 0 40px rgba(124, 58, 237, 0.5)',
-                      '0 0 80px rgba(0, 212, 255, 0.5)',
-                      '0 0 40px rgba(251, 191, 36, 0.5)',
-                      '0 0 40px rgba(124, 58, 237, 0.5)',
-                    ],
-                  }}
-                  transition={{
-                    scale: { duration: 0.8, delay: 0.3 },
-                    boxShadow: { duration: 4, repeat: Infinity },
-                  }}
-                >
-                  <img
-                    src={logoImage}
-                    alt="Mudofaa Vazirligi Sport Markazi Logo"
-                    className="object-cover w-full h-full"
-                    onError={(e) => {
-                      console.error('Logo image failed to load:', e);
-                      (e.target as HTMLImageElement).style.display = 'none';
-                    }}
-                    onLoad={() => {
-                      console.log('Logo image loaded successfully');
-                    }}
-                  />
-                </motion.div>
-
-                {/* Reduced particles around logo for better performance */}
-                {[...Array(8)].map((_, i) => (
+                  {/* Title with 3D text effect */}
                   <motion.div
-                    key={i}
-                    className="absolute w-2 h-2 rounded-full will-change-transform"
-                    style={{
-                      left: '50%',
-                      top: '50%',
-                      background: ['#00d4ff', '#7c3aed', '#fbbf24'][i % 3],
-                    }}
-                    animate={{
-                      x: Math.cos((i * Math.PI * 2) / 8) * 120,
-                      y: Math.sin((i * Math.PI * 2) / 8) * 120,
-                      scale: [0, 1, 0],
-                      opacity: [0, 0.8, 0],
-                    }}
-                    transition={{
-                      duration: 2.5,
-                      repeat: Infinity,
-                      delay: i * 0.15,
-                      ease: "easeInOut"
-                    }}
-                  />
-                ))}
+                    initial={{ opacity: 0, y: 50 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ delay: 0.5, duration: 0.8 }}
+                    className="space-y-2 sm:space-y-3 lg:space-y-4 mb-40"
+                  >
+                    <h1 className="text-md sm:text-xl md:text-2xl lg:text-3xl xl:text-4xl font-light text-white/95">
+                      <span className="bg-gradient-to-r from-slate-200 via-white to-slate-100 bg-clip-text text-transparent tracking-wide">
+                        O'zbekiston Respublikasi
+                      </span>
+                    </h1>
+                    <h2 className="text-sm sm:text-md md:text-xl lg:text-2xl font-normal text-white/80 tracking-wide">
+                      Mudofa Vazirligi Sport Markazi
+                    </h2>
+                  </motion.div>
+                </>
+              )}
 
-                {/* Glow effect */}
-                <motion.div
-                  className="absolute inset-0 rounded-full bg-gradient-to-br from-[#00d4ff] via-purple-500 to-yellow-500 blur-3xl opacity-50"
-                  animate={{
-                    scale: [1, 1.5, 1],
-                    opacity: [0.3, 0.6, 0.3],
-                  }}
-                  transition={{
-                    duration: 3,
-                    repeat: Infinity,
-                  }}
-                />
-              </motion.div>
-
-              {/* Title with 3D text effect */}
-              <motion.div
-                initial={{ opacity: 0, y: 50 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: 0.5, duration: 0.8 }}
-                className="space-y-2 sm:space-y-3 lg:space-y-4 mb-20"
-              >
-                <h1 className="text-md sm:text-xl md:text-2xl lg:text-3xl xl:text-4xl font-light text-white/95">
-                  <span className="bg-gradient-to-r from-slate-200 via-white to-slate-100 bg-clip-text text-transparent tracking-wide">
-                    O'zbekiston Respublikasi
-                  </span>
-                </h1>
-                <h2 className="text-sm sm:text-md md:text-xl lg:text-2xl font-normal text-white/80 tracking-wide">
-                  Mudofa Vazirligi Sport Markazi
-                </h2>
-              </motion.div>
             </motion.div>
           </div>
         </motion.div>

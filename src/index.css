@@ -291,11 +291,11 @@ body {
   box-shadow: none !important;
 }
 
-.container {
+/* .container {
   max-width: 1200px;
   margin: 0 auto;
   padding: 0 16px;
-}
+} */
 
 /* Custom animations for the logo */
 @keyframes logoGlow {
@@ -458,10 +458,10 @@ body {
 }
 
 #root {
-  max-width: 1280px;
+  /* max-width: 1280px;
   margin: 0 auto;
   padding: 2rem;
-  text-align: center;
+  text-align: center; */
 }
 
 .logo {

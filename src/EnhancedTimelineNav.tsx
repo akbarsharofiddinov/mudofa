@@ -8,14 +8,14 @@ interface Props {
   className?: string;
   /** How many mini-dots to render between each main item */
   betweenDots?: number; // default 8
-  xCoordinate?: number;
+  coordinates?: [number, number, number];
 }
 
 export default function EnhancedTimelineNav({
   items,
   className,
   betweenDots = 8,
-  xCoordinate
+  coordinates
 }: Props) {
   const [active, setActive] = useState<string | null>(null);
   const location = useLocation();
@@ -23,10 +23,26 @@ export default function EnhancedTimelineNav({
   // Scroll-spy: highlight section mostly in view
   useEffect(() => {
     setActive(location.pathname.split("/")[1] || "/");
-    if (xCoordinate! >= -16 && xCoordinate! <= -10) {
-      setActive("management")
+    if (coordinates![1] === -2.6) {
+      if (coordinates![0] >= -13 && coordinates![0] < -10) {
+        setActive("management")
+      } else if (coordinates![0] >= -10 && coordinates![0] <= -8) {
+        setActive("statistics")
+      } else if (coordinates![0] >= -8 && coordinates![0] <= -4) {
+        setActive("competitions")
+      } else if (coordinates![0] >= -4 && coordinates![0] <= -1) {
+        setActive("achievements")
+      } else if (coordinates![0] >= -1 && coordinates![0] <= 2) {
+        setActive("team")
+      } else if (coordinates![0] >= 2 && coordinates![0] <= 5) {
+        setActive("events")
+      } else if (coordinates![0] >= 5 && coordinates![0] <= 8) {
+        setActive("news")
+      } else if (coordinates![0] >= 8 && coordinates![0] <= 12) {
+        setActive("strategy")
+      }
     }
-  }, [location, xCoordinate]);
+  }, [location, coordinates]);
 
   const navigate = useNavigate();
 

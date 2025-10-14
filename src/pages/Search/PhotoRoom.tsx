@@ -1,9 +1,16 @@
 import { useEffect, useRef } from "react"
+import { Button } from "antd"
 
 const ROTATE_SPEED = 0.25;
 const SWAP_ANGLE = 90;
 
-const PhotoRoom = (props: { imageData: string[] }) => {
+interface IProps {
+  imageData: string[];
+  setImageData: React.Dispatch<React.SetStateAction<string[]>>;
+  children?: React.ReactNode;
+}
+
+const PhotoRoom: React.FC<IProps> = ({ imageData, setImageData, children }) => {
 
   const el = useRef<HTMLDivElement>(null);
 
@@ -35,7 +42,7 @@ const PhotoRoom = (props: { imageData: string[] }) => {
       }
       // Apply image background
       const item = wall.firstChild as HTMLDivElement;
-      item.style.backgroundImage = `url(${props.imageData[i]})`;
+      item.style.backgroundImage = `url(${imageData[i]})`;
     }
 
     // Track current wall to be swapped
@@ -50,7 +57,7 @@ const PhotoRoom = (props: { imageData: string[] }) => {
     const updateFrame = () => {
 
       // Ignore empty data
-      if (props.imageData.length == 0) return;
+      if (imageData.length == 0) return;
 
       // Rotate the room
       currentAngle += ROTATE_SPEED;
@@ -61,20 +68,23 @@ const PhotoRoom = (props: { imageData: string[] }) => {
 
         nextAngle += SWAP_ANGLE;
         const theWall = walls[swapIndex].firstChild as HTMLDivElement;
-        theWall.style.backgroundImage = `url(${props.imageData[nextIndex]})`;
+        theWall.style.backgroundImage = `url(${imageData[nextIndex]})`;
 
         // Increase indexes on every SWAP_ANGLE
         swapIndex++; nextIndex++;
         if (swapIndex >= 4) swapIndex = 0;
-        if (nextIndex >= props.imageData.length) nextIndex = 0;
+        if (nextIndex >= imageData.length) nextIndex = 0;
       }
       animId.current = requestAnimationFrame(updateFrame);
     }
     updateFrame();
-  }, [props.imageData]);
+  }, [imageData]);
 
   return (
     <div className="container">
+      <div className="absolute top-4 left-[50%] translate-x-[-50%] z-90">
+        {children}
+      </div>
       <div className="photo-room" ref={el}>
         <div className="room-wall back-wall"></div>
         <div className="room-wall right-wall"></div>

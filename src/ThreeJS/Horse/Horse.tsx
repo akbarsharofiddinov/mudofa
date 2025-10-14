@@ -1,14 +1,18 @@
-import { Suspense, useEffect, useRef, type JSX } from "react";
+import React, { Suspense, useEffect, useRef, type JSX } from "react";
 import { Canvas } from "@react-three/fiber";
 import { Environment, OrbitControls, ContactShadows, useGLTF, Center, useAnimations } from "@react-three/drei";
 import { Group } from "three";
 import * as THREE from "three"
 
 import horseUrl from "@/assets/models/horse.glb?url";
+import { useAppDispatch, useAppSelector } from "@/store/hooks";
+import { setHorseAnimationFinished } from "@/store/slices/infoSlice";
 
 interface IProps {
-  xCoordinate: number;
-  setXCoordinate: React.Dispatch<React.SetStateAction<number>>;
+  coordinates: [number, number, number]
+  setCoordinates: React.Dispatch<React.SetStateAction<[number, number, number]>>
+  rotation: [number, number, number]
+  setRotation: React.Dispatch<React.SetStateAction<[number, number, number]>>
 }
 
 const MODEL_URL = horseUrl;
@@ -39,7 +43,6 @@ function HorseModel(props: JSX.IntrinsicElements["group"]) {
       }
     });
 
-
     scene.position.set(0, 0, 0);
     scene.rotation.set(0, Math.PI / 2, 0);
     scene.scale.set(1.5, 1.5, 1.5);
@@ -55,37 +58,71 @@ function HorseModel(props: JSX.IntrinsicElements["group"]) {
 
 useGLTF.preload(MODEL_URL);
 
-const Horse: React.FC<IProps> = ({ xCoordinate, setXCoordinate }) => {
+const Horse: React.FC<IProps> = ({ coordinates, setCoordinates, rotation, setRotation }) => {
+
+  const [scale, setScale] = React.useState(14);
+  const { horseAnimationFinished } = useAppSelector(state => state.infoSlice)
+
+  const dispatch = useAppDispatch()
 
   useEffect(() => {
-    setTimeout(() => {
-      setXCoordinate((prev) => (prev >= 22 ? -22 : prev + 0.08));
-    }, 10);
-  }, [xCoordinate, setXCoordinate]);
+
+    if (coordinates[0] <= 24 && coordinates[1] === -2.6) {
+      setTimeout(() => {
+        setCoordinates((prev) => {
+          return [prev[0] + 0.08, prev[1], prev[2]];
+        })
+      }, 10);
+    }
+
+    if (coordinates[0] >= 24) {
+      setCoordinates(prev => [prev[0], 2.6, prev[2]]);
+      setRotation([0, Math.PI, 0]);
+    }
+
+    if (coordinates[1] === 2.6 && rotation[1] === Math.PI) {
+      setTimeout(() => {
+        setCoordinates((prev) => {
+          if (prev[0] >= 1 && prev[0] <= 2) {
+            dispatch(setHorseAnimationFinished(true))
+          }
+          return [prev[0] >= 1.2 ? prev[0] - 0.08 : prev[0], prev[1], prev[2]];
+        })
+      }, 10);
+    }
+  }, [coordinates, setCoordinates, rotation, setRotation, dispatch]);
+
+  useEffect(() => {
+    if (horseAnimationFinished) {
+      setScale(0)
+    }
+  }, [horseAnimationFinished])
 
   return (
     <>
-      <Canvas shadows camera={{ position: [0, 200, 800], fov: 45 }} dpr={[1, 2]}>
-        <Suspense fallback={null}>
-          <ambientLight intensity={0.5} />
-          {/* <axesHelper args={[5]} /> */}
-          <group position={[xCoordinate, -3, 0]} rotation={[0, 0, 0]}>
-            <Center>
-              <HorseModel />
-            </Center>
-          </group>
-          <ContactShadows position={[0, -0.001, 0]} opacity={0.4} blur={2.5} scale={10} />
-          <Environment preset="city" />
-          <OrbitControls makeDefault
-            target={[1, 0.7, 0]}
-            maxDistance={20}
-            minDistance={20}
-            enableRotate={false}     // 🛑 Aylantirishni bloklaydi
-            enableZoom={false}       // 🛑 Zoomni bloklaydi
-            enablePan={false}
-          />
-        </Suspense>
-      </Canvas>
+      {!horseAnimationFinished && (
+        <Canvas shadows camera={{ position: [0, 200, 800], fov: 45 }} dpr={[1, 2]}>
+          <Suspense fallback={null}>
+            <ambientLight intensity={0.5} />
+            {/* <axesHelper args={[5]} /> */}
+            <group position={[coordinates[0], coordinates[1], coordinates[2]]} rotation={rotation}>
+              <Center>
+                <HorseModel />
+              </Center>
+            </group>
+            <ContactShadows position={[0, -0.001, 0]} opacity={0.4} blur={2.5} scale={14} />
+            <Environment preset="city" />
+            <OrbitControls makeDefault
+              target={[1, 0.7, 0]}
+              maxDistance={15}
+              minDistance={15}
+              enableRotate={false}     // 🛑 Aylantirishni bloklaydi
+              enableZoom={false}       // 🛑 Zoomni bloklaydi
+              enablePan={false}
+            />
+          </Suspense>
+        </Canvas>
+      )}
     </>
   );
 };
