@@ -6,6 +6,7 @@ import SearchInput from './pages/Search/SearchInput'
 import PhotoRoom from './pages/Search/PhotoRoom'
 import { Provider } from 'react-redux'
 import { store } from './store'
+import { PlannedEventsSection } from './pages/PlannedEvents/PlannedEventsSection'
 
 const App: React.FC = () => {
 
@@ -40,6 +41,10 @@ const App: React.FC = () => {
         {
           path: "management",
           element: <Management />
+        },
+        {
+          path: "events",
+          element: <PlannedEventsSection />
         },
         {
           path: "*",
