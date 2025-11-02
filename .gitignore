@@ -22,3 +22,10 @@ dist-ssr
 *.njsproj
 *.sln
 *.sw?
+
+# 3D model fayllarni e'tiborga olma
+*.glb
+*.gltf
+*.obj
+*.fbx
+*.stl

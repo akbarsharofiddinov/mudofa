@@ -18,8 +18,8 @@ interface GlareHoverProps {
 }
 
 const GlareHover: React.FC<GlareHoverProps> = ({
-  width = '100px',
-  height = '50px',
+  width = '90px',
+  height = '40px',
   borderRadius = '10px',
   borderColor = '#333',
   children,
@@ -86,7 +86,7 @@ const GlareHover: React.FC<GlareHoverProps> = ({
 
   return (
     <div
-      className={`relative grid place-items-center overflow-hidden border cursor-pointer ${className} bg-white/10 hover:bg-white/20 transition-colors duration-300`}
+      className={`relative grid place-items-center overflow-hidden cursor-pointer ${className} transition-colors duration-300`}
       style={{
         width,
         height,

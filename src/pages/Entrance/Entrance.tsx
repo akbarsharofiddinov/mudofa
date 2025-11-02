@@ -1,56 +1,34 @@
 import ShinyText from '@/components/UI/ShinyText';
-import { LogIn } from 'lucide-react';
+import { LogIn, Search } from 'lucide-react';
 import React, { useState } from 'react'
-import { Outlet, useNavigate } from 'react-router-dom'
+import { Outlet } from 'react-router-dom'
 import NavigationLogo from '@/components/NavigationLogo';
 import { Cursor, useTypewriter } from 'react-simple-typewriter';
-import LightRays from '@/components/UI/LaytRay';
+import LightRays from '@/components/UI/LightRay';
+import EnhancedTimelineNav from '@/EnhancedTimelineNav';
+import { HorseModel } from '@/ThreeJS';
+import SearchInput from '../Search/SearchInput';
+import PhotoRoom from '../Search/PhotoRoom';
+import { Button } from 'antd';
 
 const navItems = [
-  {
-    label: "Biz haqimizda",
-    link: "about"
-  },
-  {
-    label: "Statistika",
-    link: "statistics"
-  },
-  {
-    label: "Rahbariyat",
-    link: "management"
-  },
-  {
-    label: "Erishilgan yutuqlar",
-    link: "achievements"
-  },
-  {
-    label: "O’tkazilgan musobaqalar",
-    link: "competitions"
-  },
-  {
-    label: "Bizning jamoa",
-    link: "team"
-  },
-  {
-    label: "Rejalashtirilgan sport tadbirlari",
-    link: "events"
-  },
-  {
-    label: "Yangiliklar",
-    link: "news"
-  },
-  {
-    label: "Bizning strategiya",
-    link: "strategy"
-  },
-  {
-    label: "Yaratilgan imkoniyat",
-    link: "opportunities"
-  },
+  { label: "Rahbariyat", link: "management" },
+  { label: "Statistika", link: "statistics" },
+  { label: "Musobaqalar", link: "competitions" },
+  { label: "Yutuqlar", link: "achievements" },
+  { label: "Bizning Jamoa", link: "team" },
+  { label: "Tadbirlar", link: "events" },
+  { label: "Yangiliklar", link: "news" },
+  { label: "Bizning strategiya", link: "strategy" },
 ];
 
 const Entrance: React.FC = () => {
-  const [showEntrance, setShowEntrance] = useState(true)
+  const [showEntrance, setShowEntrance] = useState(false);
+  const [showGallery, setShowGallery] = useState(false);
+  const [imageData, setImageData] = useState<string[]>([]);
+  const [coordinates, setCoordinates] = useState<[number, number, number]>([-13, -2.6, 0]);
+  const [rotation, setRotation] = useState<[number, number, number]>([0, 0, 0]);
+
   const text = useTypewriter({
     words: ["O’zbekiston Respublikasi Mudofa Vazirligi Sport Markazi"],
     loop: 1,
@@ -64,80 +42,111 @@ const Entrance: React.FC = () => {
     },
   })
 
-  const navigate = useNavigate();
-
   return (
-    <>
-      <main className={`w-full h-screen transition-all duration-500`}>
-        <NavigationLogo />
-        <Outlet />
-
-        {/* Log in button */}
-        <button className="flex items-center flex-row-reverse gap-2 fixed top-4 right-4 z-90">
-
-          <ShinyText>
-            <div className='flex items-center gap-2 text-white'>
-              <LogIn /> Kirish
-            </div>
-          </ShinyText>
-        </button>
-
-      </main>
-
-      {!showEntrance && (
-        <nav className={`fixed inset-x-0 bottom-0 z-20 w-full bg-yellow-500/10 backdrop-blur-md border-t border-yellow-500/30 py-6 transition-all duration-1000 opacity-100 translate-y-0`}>
-          <div className="navbar-container w-full mx-auto px-8 lg:px-12 xl:px-16 2xl:px-20 relative">
-            {/* Timeline Navigation Items - Yellow Theme */}
-            <ul className="relative flex items-center justify-between min-h-[70px] w-full">
-              {/* Gradient Dotted Line */}
-              <div className="gradient-dotted-line absolute top-1/2 left-0 right-0 h-1 transform -translate-y-1/2 z-0"></div>
-
-              {navItems.map((item, index) => (
-                <li key={index} onClick={() => navigate(item.link)} className="flex-1 relative z-10">
-                  <div className="motion-navigation-item group cursor-pointer relative flex flex-col items-center justify-center p-2 transition-all duration-300 hover:scale-105">
-                    <div className="motion-navigation-dot w-2 h-2 rounded-full mb-2 transition-all duration-300 bg-yellow-500/60 group-hover:bg-yellow-500 group-hover:shadow-[0_0_15px_yellow] group-hover:scale-150"></div>
-                    <div className="motion-navigation-label text-xs text-white/70 group-hover:text-yellow-300 font-medium tracking-wider transition-all duration-300 text-center leading-tight max-w-[90px]">
-                      {item.label}
-                    </div>
-                    <div className="absolute inset-0 rounded-lg opacity-0 group-hover:opacity-20 transition-opacity duration-300 bg-yellow-500"></div>
-                  </div>
-                </li>
-              ))}
-            </ul>
-          </div>
-        </nav>
-      )}
-
-      {/* Entrance Overlay */}
-      {showEntrance && (
-        <div className='fixed inset-0 z-50 flex items-center justify-center bg-black/10 backdrop-blur-xl'>
-
-          <div className='relative w-full flex items-center z-90 justify-center h-screen p-8 backdrop-blur-md'>
-            <LightRays raysOrigin="top-center"
-              raysColor="#00ffff"
-              raysSpeed={1.5}
-              lightSpread={0.8}
-              rayLength={1.2}
-              followMouse={true}
-              mouseInfluence={0.1}
-              noiseAmount={0.1}
-              distortion={0.05}
-              className="custom-rays h-screen" />
-
-            <div className='text-center absolute inset-0 flex flex-col justify-center items-center break-words text-white space-y-6'>
-
-              <h1 className='text-7xl font-normal max-w-[1100px] bg-gradient-to-r from-blue-400 to-purple-400 bg-clip-text text-white'>
-                {text[0]}
-                <Cursor cursorStyle='|' />
-              </h1>
-            </div>
-
-            <div className='absolute top-4 right-4 w-8 h-8 bg-gradient-to-br from-blue-400/30 to-purple-400/30 rounded-full blur-sm'></div>
-            <div className='absolute bottom-4 left-4 w-6 h-6 bg-gradient-to-br from-purple-400/30 to-pink-400/30 rounded-full blur-sm'></div>
-          </div>
+    showGallery ? (
+      <>
+        <div className="w-full h-screen flex flex-col items-center overflow-hidden">
+          <PhotoRoom setImageData={setImageData} imageData={imageData}>
+            <h1 className='text-center font-bold text-2xl m-2'>Galareya xonasi</h1>
+            <SearchInput setImageData={setImageData} />
+          </PhotoRoom>
         </div>
-      )}
-    </>
+      </>
+    ) : (
+      <>
+
+        {/* Coordinates */}
+        {/* <div className='absolute top-4 left-4'>
+          <p>
+            X: {coordinates[0]} <br />
+            Y: {coordinates[1]} <br />
+            Z: {coordinates[2]}
+          </p>
+        </div> */}
+
+        {/* Rotation */}
+        {/* <div className='absolute top-4 left-4'>
+          <p>
+            X: {rotation[0]} <br />
+            Y: {rotation[1]} <br />
+            Z: {rotation[2]}
+          </p>
+        </div> */}
+
+
+        < main className={`w-full h-screen transition-all duration-500`
+        }>
+          <NavigationLogo />
+          <Outlet />
+
+          {
+            location.pathname === '/' && (
+              <div className='absolute inset-0 z-[80]'>
+                <HorseModel
+                  coordinates={coordinates} setCoordinates={setCoordinates}
+                  rotation={rotation} setRotation={setRotation}
+                />
+              </div>
+            )
+          }
+
+          <div className='flex items-center gap-2 fixed top-4 right-4 z-90'>
+            {/* <Input placeholder="Qidirish" className='rounded-full bg-white/20 backdrop-blur-sm border-0 text-white placeholder:text-white focus:border-0 focus:ring-0 max-w-[100px] h-10' /> */}
+            <ShinyText className='h-10 bg-transparent hover:bg-white/10 transition-all duration-300'>
+              <div className='flex items-center gap-2 text-white text-[14px] w-full h-full' onClick={() => setShowGallery(true)}>
+                <Search size={18} className='mx-auto' />
+              </div>
+            </ShinyText>
+
+            {/* Log in button */}
+            <ShinyText className='h-10 bg-white/10 hover:bg-white/20 border'>
+              <div className='flex items-center gap-2 text-white text-[14px]'>
+                <LogIn size={18} /> Kirish
+              </div>
+            </ShinyText>
+          </div>
+
+        </main >
+
+        {!showEntrance && (
+          <>
+            < EnhancedTimelineNav items={navItems} betweenDots={8} coordinates={coordinates} />
+          </>
+        )}
+
+        {/* Entrance Overlay */}
+        {
+          showEntrance && (
+            <div className='fixed inset-0 z-50 flex items-center justify-center bg-black/10 backdrop-blur-xl'>
+
+              <div className='relative w-full flex items-center z-90 justify-center h-screen p-8 backdrop-blur-md'>
+                <LightRays raysOrigin="top-center"
+                  raysColor="#00ffff"
+                  raysSpeed={1.5}
+                  lightSpread={0.8}
+                  rayLength={1.2}
+                  followMouse={true}
+                  mouseInfluence={0.1}
+                  noiseAmount={0.1}
+                  distortion={0.05}
+                  className="custom-rays h-screen" />
+
+                <div className='text-center absolute inset-0 flex flex-col justify-center items-center break-words text-white space-y-6'>
+
+                  <h1 className='text-7xl font-normal max-w-[1100px] bg-gradient-to-r from-blue-400 to-purple-400 bg-clip-text text-white'>
+                    {text[0]}
+                    <Cursor cursorStyle='|' />
+                  </h1>
+                </div>
+
+                <div className='absolute top-4 right-4 w-8 h-8 bg-gradient-to-br from-blue-400/30 to-purple-400/30 rounded-full blur-sm'></div>
+                <div className='absolute bottom-4 left-4 w-6 h-6 bg-gradient-to-br from-purple-400/30 to-pink-400/30 rounded-full blur-sm'></div>
+              </div>
+            </div>
+          )
+        }
+      </>
+    )
   )
 }
 

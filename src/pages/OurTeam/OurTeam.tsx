@@ -77,7 +77,7 @@ const DEFAULT_IMAGES: ImageItem[] = [
 const DEFAULTS = {
   maxVerticalRotationDeg: 5,
   dragSensitivity: 20,
-  enlargeTransitionMs: 300,
+  enlargeTransitionMs: 0,
   segments: 35
 };
 
@@ -154,7 +154,7 @@ const OurTeam: React.FC = ({
   images = DEFAULT_IMAGES,
   fit = 0.5,
   fitBasis = 'auto',
-  minRadius = 600,
+  minRadius = 500,
   maxRadius = Infinity,
   padFactor = 0.25,
   overlayBlurColor = '#060010',
@@ -248,7 +248,7 @@ const OurTeam: React.FC = ({
           basis = aspect >= 1.3 ? w : minDim;
       }
       let radius = basis * fit;
-      const heightGuard = h * 1.35;
+      const heightGuard = h * .8;
       radius = Math.min(radius, heightGuard);
       radius = clamp(radius, minRadius, maxRadius);
       lockedRadiusRef.current = Math.round(radius);
@@ -941,9 +941,26 @@ const OurTeam: React.FC = ({
         </motion.div>
       </button>
       <style dangerouslySetInnerHTML={{ __html: cssStyles }} />
+      {/* Left side */}
+      <div className='absolute left-10 top-[20%] text-white max-w-[300px] max-h-[400px] custom-scrollbar overflow-y-auto bg-white/15 p-4 rounded-md border-1 border-white/30'>
+        <ul className='flex flex-col gap-4'>
+          <li>1. O‘zbekiston jamoasi Osiyo chempioni bo‘ldi.</li>
+          <li>2. ⚽ Real Madrid kuchli g‘alabaga erishdi.</li>
+          <li>3. 🏀 NBAda yangi mavsum rasman boshlandi.</li>
+          <li>4. 🥇 Djokovic yana “Grand Slam” g‘olibi bo‘ldi.</li>
+          <li>5. 🏃 Bolt rekordini hali hech kim yangilamadi.</li>
+          <li>5. 🏃 Bolt rekordini hali hech kim yangilamadi.</li>
+          <li>5. 🏃 Bolt rekordini hali hech kim yangilamadi.</li>
+          <li>5. 🏃 Bolt rekordini hali hech kim yangilamadi.</li>
+          <li>5. 🏃 Bolt rekordini hali hech kim yangilamadi.</li>
+          <li>5. 🏃 Bolt rekordini hali hech kim yangilamadi.</li>
+          <li>5. 🏃 Bolt rekordini hali hech kim yangilamadi.</li>
+          <li>5. 🏃 Bolt rekordini hali hech kim yangilamadi.</li>
+        </ul>
+      </div>
       <div
         ref={rootRef}
-        className="sphere-root relative w-full h-full"
+        className="sphere-root relative w-[70%] ml-auto h-full"
         style={
           {
             ['--segments-x' as any]: segments,
@@ -957,7 +974,7 @@ const OurTeam: React.FC = ({
       >
         <main
           ref={mainRef}
-          className="absolute inset-0 grid place-items-center overflow-hidden select-none bg-transparent"
+          className="absolute inset-0 grid place-items-center overflow-hidden select-none bg-transparent mx-auto"
           style={{
             touchAction: 'none',
             WebkitUserSelect: 'none'
@@ -1028,15 +1045,6 @@ const OurTeam: React.FC = ({
             className="absolute inset-0 m-auto z-[3] pointer-events-none"
             style={{
               backgroundImage: `radial-gradient(rgba(235, 235, 235, 0) 65%, var(--overlay-blur-color, ${overlayBlurColor}) 100%)`
-            }}
-          />
-
-          <div
-            className="absolute inset-0 m-auto z-[3] pointer-events-none"
-            style={{
-              WebkitMaskImage: `radial-gradient(rgba(235, 235, 235, 0) 70%, var(--overlay-blur-color, ${overlayBlurColor}) 90%)`,
-              maskImage: `radial-gradient(rgba(235, 235, 235, 0) 70%, var(--overlay-blur-color, ${overlayBlurColor}) 90%)`,
-              backdropFilter: 'blur(3px)'
             }}
           />
 

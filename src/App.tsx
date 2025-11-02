@@ -1,11 +1,9 @@
-import React, { Suspense } from 'react'
+import React from 'react'
 import { createBrowserRouter, RouterProvider } from 'react-router-dom'
-import { Achievements, Entrance, Home, OurTeam } from "@/pages"
+import { Achievements, Entrance, Home, Management, OurTeam } from "@/pages"
 import ErrorPageHandling from './pages/ErrorPageHandling/ErrorPageHandling'
-import { UI } from './ThreeJS/Book/UI'
-import { Loader } from '@react-three/drei'
-import { Canvas } from '@react-three/fiber'
-import { Experience } from './ThreeJS/Book/Experience'
+import { Provider } from 'react-redux'
+import { store } from './store'
 
 const App: React.FC = () => {
 
@@ -25,41 +23,37 @@ const App: React.FC = () => {
         },
         {
           path: "achievements",
-          element: (
-            <>
-              <UI />
-              <Loader />
-              <Canvas
-                shadows
-                camera={{
-                  position: [-0.5, 1, window.innerWidth > 800 ? 4 : 9],
-                  fov: 45,
-                }}
-              >
-                <group position-y={0}>
-                  <Suspense fallback={null}>
-                    <Experience />
-                  </Suspense>
-                </group>
-              </Canvas>
-            </>
-          )
+          element: <Achievements />
         },
         {
           path: "competitions",
-          element: <Achievements />
+          element: <></>
+        },
+        {
+          path: "management",
+          element: <Management />
         },
         {
           path: "*",
           element: <ErrorPageHandling />
-        }
+        },
       ]
     },
   ])
 
   return (
     <>
-      <RouterProvider router={routes} />
+      <Provider store={store}>
+        <RouterProvider router={routes} />
+      </Provider>
+      {/* <div className='w-full h-screen'>
+        <HorseModel />
+      </div> */}
+      {/* <div className="w-full h-screen flex flex-col items-center overflow-hidden">
+        <h1 className='text-center font-bold text-2xl m-2'>React Photo Room</h1>
+        <SearchInput setImageData={setImageData} />
+        <PhotoRoom imageData={data.imageData}></PhotoRoom>
+      </div> */}
     </>
   )
 }
