@@ -2,10 +2,10 @@ import React, { Suspense } from 'react'
 import { createBrowserRouter, RouterProvider } from 'react-router-dom'
 import { Achievements, Entrance, Home, OurTeam } from "@/pages"
 import ErrorPageHandling from './pages/ErrorPageHandling/ErrorPageHandling'
-import { UI } from './ThreeJS/UI'
+import { UI } from './ThreeJS/Book/UI'
 import { Loader } from '@react-three/drei'
 import { Canvas } from '@react-three/fiber'
-import { Experience } from './ThreeJS/Experience'
+import { Experience } from './ThreeJS/Book/Experience'
 
 const App: React.FC = () => {
 

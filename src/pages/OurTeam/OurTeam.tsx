@@ -69,7 +69,7 @@ const DEFAULT_IMAGES: ImageItem[] = [
   },
   {
     src: sport6,
-    alt: 'nurxon qurbonova',
+    alt: 'diyora keldiyorova',
     desc: "<div><h4>Diyora Keldiyorova o‘zbek dzyudosi tarixida ilk bor oltin medalni qo‘lga kiritgan sportchiga aylandi</h4> <p>28-iyul kuni dzyudo bo‘yicha O‘zbekiston terma jamoasi aʼzosi Diyora Keldiyorova -52 kg vazn toifasida Parij Olimpiadasida g‘oliblikni qo‘lga kiritdi. Diyora o‘zbekistonlik dzyudochilar orasida birinchi bo‘lib Olimpiada g‘olibiga aylandi. O‘zbekistonlik dzyudochilardan Armen Bagdasarov (Atlanta—1996) va Abdullo Tangriyev (Pekin—2008) Olimpiya o‘yinlarida kumush, Rishod Sobirov uch marotaba bronza medalini qo‘lga kiritgan. Shuningdek, Diyorbek O‘rozboyev va Davlat Bobonov hisobida ham bittadan bronza medali bor. Keldiyorova ushbu natija orqali o‘zbekistonlik ayol sportchilar orasida yozgi Olimpiadalarda birinchi oltin medalni qo‘lga kiritgan ilk sportchiga aylandi. Bungacha o‘zbekistonlik ayol sportchilardan faqatgina trampolindan sakrash bahslarida Yekaterina Xilko (2008-yil, bronza) Olimpiada sovrindori bo‘lgan edi.</p></div>"
   }
 ];
