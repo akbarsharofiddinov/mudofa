@@ -25,7 +25,7 @@ export default function EnhancedTimelineNav({
     setActive(location.pathname.split("/")[1] || "/");
     if (coordinates![1] === -2.6) {
       if (coordinates![0] >= -13 && coordinates![0] < -10) {
-        setActive("management")
+        setActive("leadership")
       } else if (coordinates![0] >= -10 && coordinates![0] <= -8) {
         setActive("statistics")
       } else if (coordinates![0] >= -8 && coordinates![0] <= -4) {

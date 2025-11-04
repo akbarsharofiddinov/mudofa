@@ -4,16 +4,10 @@ import logoImage from '@/assets/mudofaLogo.png';
 import { OptimizedCanvas } from '@/components/UI/OptimizedCanvas';
 import Galaxy from '@/Motion/ReactBits/Galaxy';
 import { useAppSelector } from '@/store/hooks';
-import { Cursor } from 'react-simple-typewriter';
 import LightRays from '@/components/UI/LightRay';
 
 const Home: React.FC = () => {
   const containerRef = useRef<HTMLDivElement>(null);
-
-  // Debug log to confirm component is rendering
-  useEffect(() => {
-    console.log('Home component mounted');
-  }, []);
 
   // Use framer-motion's useMotionValue and useSpring for smooth mouse tracking
   const mouseX = useMotionValue(0);

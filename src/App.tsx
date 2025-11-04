@@ -1,12 +1,18 @@
-import React from 'react'
-import { createBrowserRouter, RouterProvider } from 'react-router-dom'
-import { Achievements, Entrance, Home, Management, OurTeam } from "@/pages"
-import ErrorPageHandling from './pages/ErrorPageHandling/ErrorPageHandling'
-import { Provider } from 'react-redux'
-import { store } from './store'
+import React from "react";
+import { createBrowserRouter, RouterProvider } from "react-router-dom";
+import { Achievements, Entrance, Home, OurTeam } from "@/pages";
+import ErrorPageHandling from "./pages/ErrorPageHandling/ErrorPageHandling";
+import { Provider } from "react-redux";
+import { store } from "./store";
+import Testing from "./pages/Test/Testing";
+import LeaderShip from "./pages/Leadership/Leadership";
+import Statistics from "./pages/Statistics/Statistics";
+import Competetions from "./pages/Competetions/Competetions";
+import PlannedEvents from "./pages/PlannedEvents/PlannedEvents";
+import { News } from "./pages/News/News";
+import { Strategy } from "./pages/Strategy/Strategy";
 
 const App: React.FC = () => {
-
   const routes = createBrowserRouter([
     {
       path: "/",
@@ -18,44 +24,56 @@ const App: React.FC = () => {
           element: <Home />,
         },
         {
-          path: "team",
-          element: <OurTeam />
+          path: "leadership",
+          element: <LeaderShip />,
         },
         {
-          path: "achievements",
-          element: <Achievements />
+          path: "statistics",
+          element: <Statistics />,
         },
         {
           path: "competitions",
-          element: <></>
+          element: <Competetions />,
         },
         {
-          path: "management",
-          element: <Management />
+          path: "achievements",
+          element: <Achievements />,
+        },
+        {
+          path: "team",
+          element: <OurTeam />,
+        },
+        {
+          path: "events",
+          element: <PlannedEvents />,
+        },
+        {
+          path: "news",
+          element: <News />,
+        },
+        {
+          path: "strategy",
+          element: <Strategy />,
         },
         {
           path: "*",
-          element: <ErrorPageHandling />
+          element: <ErrorPageHandling />,
         },
-      ]
+      ],
     },
-  ])
+    {
+      path: "test",
+      element: <Testing />,
+    },
+  ]);
 
   return (
     <>
       <Provider store={store}>
         <RouterProvider router={routes} />
       </Provider>
-      {/* <div className='w-full h-screen'>
-        <HorseModel />
-      </div> */}
-      {/* <div className="w-full h-screen flex flex-col items-center overflow-hidden">
-        <h1 className='text-center font-bold text-2xl m-2'>React Photo Room</h1>
-        <SearchInput setImageData={setImageData} />
-        <PhotoRoom imageData={data.imageData}></PhotoRoom>
-      </div> */}
     </>
-  )
-}
+  );
+};
 
-export default App
+export default App;
