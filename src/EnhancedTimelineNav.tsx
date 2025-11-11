@@ -23,7 +23,7 @@ export default function EnhancedTimelineNav({
   // Scroll-spy: highlight section mostly in view
   useEffect(() => {
     setActive(location.pathname.split("/")[1] || "/");
-    if (coordinates![1] === -2.6) {
+    if (coordinates![1] <= -1) {
       if (coordinates![0] >= -13 && coordinates![0] < -10) {
         setActive("leadership")
       } else if (coordinates![0] >= -10 && coordinates![0] <= -8) {
@@ -53,11 +53,11 @@ export default function EnhancedTimelineNav({
   return (
     <nav
       className={[
-        "fixed inset-x-0 bottom-0 z-90 w-full",
-        "pb-4 pt-2 md:pb-3 md:pt-0 lg:pb-6 lg:pt-4]",
+        "fixed inset-x-0 bottom-0 z-30 w-full",
         "bg-black/10 backdrop-blur-sm border-t border-white/10",
         className ?? "",
       ].join(" ")}
+      id="navbar"
     >
       {/* Curved glow for the 'arc' feel */}
       <div
@@ -73,41 +73,12 @@ export default function EnhancedTimelineNav({
         />
 
         <ul className="relative z-10 flex items-center justify-center gap-6">
-          {items.map((item, idx) => {
+          {items.map((item) => {
             const isActive = active === item.link;
             return (
               <React.Fragment key={item.link}>
                 {/* MAIN ITEM */}
                 <li className="first:translate-x-[5px] relative min-w-[130px] flex items-center justify-center min-h-[80px]">
-
-                  {/* MINI-DOTS BETWEEN (not after last) */}
-                  {idx < items.length - 1 && (
-                    <div className={[
-                      "absolute top-[25%] left-[50%] flex items-center gap-2 translate-x-[10px] translate-y-[5px] first:translate-x-[18px]",
-                      // `${idx === 0 && "translate-x-[18px]"}`,
-                      // `${idx === 1 && ""}`,
-                      // `${idx === 2 && "translate-x-[15px]"}`,
-                      // `${idx === 3 && "translate-x-[15px]"}`,
-                      // `${idx === 4 && "translate-x-[15px]"}`,
-                      // `${idx === items.length - 2 && "translate-x-[10px]"}`
-                    ].join(" ")}>
-                      {Array.from({
-                        length: idx === 0 ? betweenDots + 2
-                          : idx === 1 ? betweenDots + 3
-                            : idx === 2 ? betweenDots + 3
-                              : idx === 3 ? betweenDots + 3
-                                : idx === 4 ? betweenDots + 3
-                                  : idx === 5 ? betweenDots + 3
-                                    : idx === items.length - 2 ? betweenDots + 4
-                                      : betweenDots
-                      }).map((_, i) => (
-                        <span
-                          key={i}
-                          className="inline-block size-[4px] rounded-full bg-yellow-300/40"
-                        />
-                      ))}
-                    </div>
-                  )}
 
                   <button
                     type="button"
@@ -146,7 +117,6 @@ export default function EnhancedTimelineNav({
                     ].join(" ")} />
                   </button>
                 </li>
-
 
               </React.Fragment>
             );

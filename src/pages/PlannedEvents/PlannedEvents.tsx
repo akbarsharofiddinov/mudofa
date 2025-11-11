@@ -1,36 +1,38 @@
-/* eslint-disable react-refresh/only-export-components */
 import { useState } from 'react';
 import { motion } from 'framer-motion';
 import { useLanguage } from '@/hooks/useLanguage';
 import { useTheme } from '@/hooks/useTheme';
-import { getTranslation } from '@/utils/translations';
-import { MapPin, Users, Clock, Search, X, CalendarDays, Trophy, Target, Crosshair, Flame, Swords } from 'lucide-react';
-import { Input } from '@/components/UI/input';
+import { MapPin, Users, Clock, Search, X, CalendarDays, Trophy, Crosshair, Swords } from 'lucide-react';
+import { Input } from 'antd';
 import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle } from '@/components/UI/dialog';
-import { Badge } from '@/components/UI/badge';
 import { CalendarPage } from '../CalendarPage';
+import { FaRunning } from 'react-icons/fa';
+import { GiBoxingGlove } from 'react-icons/gi';
+import { MdOutlineSportsKabaddi } from 'react-icons/md';
+import { FaPersonSwimming } from "react-icons/fa6";
 
 // Sport icon mapping
 const getSportIcon = (sport: string) => {
   const sportLower = sport.toLowerCase();
-  
-  if (sportLower.includes('otishma') || sportLower.includes('shooting')) {
+  if (sportLower.includes('otish') || sportLower.includes('shooting')) {
     return { icon: Crosshair, color: 'text-red-500' };
   }
   if (sportLower.includes('kurash') || sportLower.includes('wrestling')) {
-    return { icon: Users, color: 'text-purple-500' };
+    return { icon: MdOutlineSportsKabaddi, color: 'text-purple-500' };
   }
-  if (sportLower.includes('box') || sportLower.includes('boxing')) {
-    return { icon: Flame, color: 'text-orange-500' };
+  if (sportLower.includes('boks') || sportLower.includes('boxing')) {
+    return { icon: GiBoxingGlove, color: 'text-orange-500' };
   }
   if (sportLower.includes('judo')) {
-    return { icon: Swords, color: 'text-indigo-500' };
+    return { icon: MdOutlineSportsKabaddi, color: 'text-indigo-500' };
   }
   if (sportLower.includes('atletika') || sportLower.includes('athletics')) {
-    return { icon: Target, color: 'text-green-500' };
+    return { icon: FaRunning, color: 'text-green-500' };
   }
-  
-  return { icon: Trophy, color: 'text-amber-500' };
+  if(sportLower.includes('suzish') || sportLower.includes('swimming')) {
+    return { icon: FaPersonSwimming, color: 'text-blue-500' };
+  }
+  return { icon: Swords, color: 'text-gray-500' };
 };
 
 interface Event {
@@ -48,7 +50,6 @@ const PlannedEvents: React.FC = () => {
   const { language } = useLanguage();
   const { theme } = useTheme();
   const isDark = theme === 'dark';
-  const t = getTranslation(language);
   const [searchOpen, setSearchOpen] = useState(false);
   const [searchQuery, setSearchQuery] = useState('');
   const [showCalendarPage, setShowCalendarPage] = useState(false);
@@ -89,8 +90,8 @@ const PlannedEvents: React.FC = () => {
     },
     {
       date: { day: 18, month: 3, year: 2025 },
-      title: 'Jahon Kubogi - Box',
-      sport: 'Box',
+      title: 'Jahon Kubogi - Boks',
+      sport: 'Boks',
       location: 'London, Angliya',
       participants: 520,
       time: '14:00 - 22:00',
@@ -109,8 +110,8 @@ const PlannedEvents: React.FC = () => {
     },
     {
       date: { day: 25, month: 2, year: 2025 },
-      title: 'Haftalik Tayyorgarlik - Otishma',
-      sport: 'Otishma',
+      title: 'Haftalik Tayyorgarlik - O\'q otish',
+      sport: 'O\'q otish',
       location: 'Toshkent, O\'zbekiston',
       participants: 50,
       time: '10:00 - 14:00',
@@ -131,7 +132,7 @@ const PlannedEvents: React.FC = () => {
   }
 
   return (
-    <div className={`min-h-screen py-20 px-4 sm:px-6 lg:px-8 relative overflow-hidden transition-colors duration-300 ${
+    <div className={`min-h-screen pt-10 pb-20 px-4 sm:px-6 lg:px-8 relative overflow-hidden transition-colors duration-300 ${
       isDark
         ? 'bg-gradient-to-br from-emerald-950 via-slate-950 to-slate-900'
         : 'bg-gradient-to-br from-emerald-50 via-white to-amber-50'
@@ -208,14 +209,14 @@ const PlannedEvents: React.FC = () => {
         )}
       </div>
 
-      <div className="max-w-7xl mx-auto relative z-10">
+      <div className="max-w-[1000px] mx-auto relative z-10">
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           className="text-center mb-8"
         >
-          <h2 className="text-5xl md:text-6xl mb-4 bg-gradient-to-r from-emerald-400 to-amber-400 bg-clip-text text-transparent">
+          <h2 className="text-3xl md:text-4xl mb-4 bg-gradient-to-r from-emerald-400 to-amber-400 bg-clip-text text-transparent">
             {language === 'uz' ? 'Rejalashtirilgan Tadbirlar' : 'Запланированные мероприятия'}
           </h2>
           <div className="w-32 h-1 bg-gradient-to-r from-emerald-500 to-amber-500 mx-auto rounded-full"></div>
@@ -232,7 +233,7 @@ const PlannedEvents: React.FC = () => {
           >
             {searchOpen ? (
               <div className="relative">
-                <Search className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-emerald-400" />
+                <Search className="absolute left-4 top-1/2 -translate-y-1/2 w-4 h-4 text-emerald-400" />
                 <Input
                   type="text"
                   value={searchQuery}
@@ -248,13 +249,13 @@ const PlannedEvents: React.FC = () => {
                   }}
                   className="absolute right-4 top-1/2 -translate-y-1/2 p-2 hover:bg-emerald-500/20 rounded-full transition-colors"
                 >
-                  <X className="w-5 h-5 text-emerald-400" />
+                  <X className="w-4 h-4 text-emerald-400" />
                 </button>
               </div>
             ) : (
               <motion.button
                 onClick={() => setSearchOpen(true)}
-                className="w-16 h-16 bg-gradient-to-br from-emerald-500 via-green-400 to-teal-500 rounded-full flex items-center justify-center shadow-2xl relative overflow-hidden"
+                className="w-10 h-10 bg-gradient-to-br from-emerald-500 via-green-400 to-teal-500 rounded-full flex items-center justify-center shadow-2xl relative overflow-hidden"
                 whileHover={{ scale: 1.1 }}
                 whileTap={{ scale: 0.9 }}
               >
@@ -269,7 +270,7 @@ const PlannedEvents: React.FC = () => {
                     ease: 'linear',
                   }}
                 />
-                <Search className="w-7 h-7 text-white relative z-10" />
+                <Search className="w-4 h-4 text-white relative z-10" />
               </motion.button>
             )}
           </motion.div>
@@ -277,12 +278,12 @@ const PlannedEvents: React.FC = () => {
           {/* Calendar View Button */}
           <motion.button
             onClick={() => setShowCalendarPage(true)}
-            className="px-6 py-3 bg-gradient-to-r from-amber-500 to-emerald-500 text-white rounded-3xl flex items-center gap-2 shadow-2xl relative overflow-hidden"
+            className="px-4 py-2 bg-gradient-to-r from-amber-500 to-emerald-500 text-white rounded-3xl flex items-center gap-2 shadow-2xl relative overflow-hidden"
             whileHover={{ scale: 1.05 }}
             whileTap={{ scale: 0.95 }}
           >
-            <CalendarDays className="w-5 h-5" />
-            <span className="text-base">{language === 'uz' ? 'Taqvim' : 'Календарь'}</span>
+            <CalendarDays className="w-4 h-4" />
+            <span className="text-sm">{language === 'uz' ? 'Taqvim' : 'Календарь'}</span>
             <motion.div
               className="absolute inset-0 bg-white/20"
               initial={{ x: '-100%' }}
@@ -312,7 +313,7 @@ const PlannedEvents: React.FC = () => {
                 >
                   {/* 3D Date Card */}
                   <motion.div
-                    className="sm:w-32 flex-shrink-0"
+                    className="sm:w-28 flex-shrink-0"
                     whileHover={{ rotateY: 10, scale: 1.05 }}
                     style={{ transformStyle: 'preserve-3d' }}
                   >
@@ -326,7 +327,7 @@ const PlannedEvents: React.FC = () => {
                           {months[event.date.month - 1]}
                         </div>
                         <div className="p-3 text-center">
-                          <div className="text-4xl text-white mb-0.5">{event.date.day}</div>
+                          <div className="text-3xl text-white mb-0.5">{event.date.day}</div>
                           <div className="text-white/80 text-xs">{event.date.year}</div>
                         </div>
                         
@@ -353,16 +354,16 @@ const PlannedEvents: React.FC = () => {
                       <div className="absolute inset-0 bg-gradient-to-r from-amber-500/10 to-emerald-500/10 blur-xl rounded-3xl opacity-0 group-hover:opacity-100 transition-opacity"></div>
                       
                       {/* Card */}
-                      <div className={`relative backdrop-blur-xl border rounded-3xl p-5 shadow-2xl h-full transition-all duration-300 ${
+                      <div className={`relative backdrop-blur-xl border rounded-3xl p-4 shadow-2xl h-full transition-all duration-300 ${
                         isDark
                           ? 'bg-gradient-to-br from-slate-900/90 to-emerald-900/50 border-amber-500/30'
                           : 'bg-gradient-to-br from-white/95 via-emerald-50/30 to-white/95 border-emerald-200/60 shadow-emerald-200/50 hover:shadow-emerald-300/70 hover:border-emerald-300/80'
                       }`}>
                         {/* Title */}
-                        <h3 className={`text-xl mb-3 line-clamp-2 ${isDark ? 'text-amber-300' : 'text-gray-800'}`}>{event.title}</h3>
+                        <h3 className={`text-lg mb-1 line-clamp-2 ${isDark ? 'text-amber-300' : 'text-gray-800'}`}>{event.title}</h3>
 
                         {/* Details Grid */}
-                        <div className="grid grid-cols-1 gap-3">
+                        <div className="grid grid-cols-1 gap-1">
                           <motion.div
                             className={`flex items-center gap-3 ${isDark ? 'text-amber-200/70' : 'text-gray-600'}`}
                             initial={{ opacity: 0, x: -20 }}
@@ -370,11 +371,11 @@ const PlannedEvents: React.FC = () => {
                             viewport={{ once: true }}
                             transition={{ delay: 0.2 }}
                           >
-                            <div className={`w-10 h-10 rounded-xl bg-gradient-to-br ${event.color} flex items-center justify-center shadow-lg flex-shrink-0`}>
-                              <MapPin className="w-5 h-5 text-white" />
+                            <div className={`w-8 h-8 rounded-xl bg-gradient-to-br ${event.color} flex items-center justify-center shadow-lg flex-shrink-0`}>
+                              <MapPin className="w-4 h-4 text-white" />
                             </div>
                             <div className="min-w-0">
-                              <div className={`text-xs ${isDark ? 'text-amber-200/50' : 'text-gray-500'}`}>
+                              <div className={`text-[10px] ${isDark ? 'text-amber-200/50' : 'text-gray-500'}`}>
                                 {language === 'uz' ? 'Manzil' : language === 'ru' ? 'Местоположение' : 'Манзил'}
                               </div>
                               <div className="text-sm truncate">{event.location}</div>
@@ -388,11 +389,11 @@ const PlannedEvents: React.FC = () => {
                             viewport={{ once: true }}
                             transition={{ delay: 0.3 }}
                           >
-                            <div className={`w-10 h-10 rounded-xl bg-gradient-to-br ${event.color} flex items-center justify-center shadow-lg flex-shrink-0`}>
-                              <Users className="w-5 h-5 text-white" />
+                            <div className={`w-8 h-8 rounded-xl bg-gradient-to-br ${event.color} flex items-center justify-center shadow-lg flex-shrink-0`}>
+                              <Users className="w-4 h-4 text-white" />
                             </div>
                             <div>
-                              <div className={`text-xs ${isDark ? 'text-amber-200/50' : 'text-gray-500'}`}>
+                              <div className={`text-[10px] ${isDark ? 'text-amber-200/50' : 'text-gray-500'}`}>
                                 {language === 'uz' ? 'Ishtirokchilar' : language === 'ru' ? 'Участники' : 'Иштирокчилар'}
                               </div>
                               <div className="text-sm">{event.participants}</div>
@@ -406,11 +407,11 @@ const PlannedEvents: React.FC = () => {
                             viewport={{ once: true }}
                             transition={{ delay: 0.4 }}
                           >
-                            <div className={`w-10 h-10 rounded-xl bg-gradient-to-br ${event.color} flex items-center justify-center shadow-lg flex-shrink-0`}>
-                              <Clock className="w-5 h-5 text-white" />
+                            <div className={`w-8 h-8 rounded-xl bg-gradient-to-br ${event.color} flex items-center justify-center shadow-lg flex-shrink-0`}>
+                              <Clock className="w-4 h-4 text-white" />
                             </div>
                             <div>
-                              <div className={`text-xs ${isDark ? 'text-amber-200/50' : 'text-gray-500'}`}>
+                              <div className={`text-[10px] ${isDark ? 'text-amber-200/50' : 'text-gray-500'}`}>
                                 {language === 'uz' ? 'Vaqt' : language === 'ru' ? 'Время' : 'Вақт'}
                               </div>
                               <div className="text-sm">{event.time}</div>
@@ -420,7 +421,7 @@ const PlannedEvents: React.FC = () => {
 
                         {/* Progress Bar */}
                         <div className="mt-4 relative">
-                          <div className={`text-xs mb-2 ${isDark ? 'text-amber-200/50' : 'text-gray-500'}`}>
+                          <div className={`text-[10px] mb-2 ${isDark ? 'text-amber-200/50' : 'text-gray-500'}`}>
                             Tayyorgarlik darajasi
                           </div>
                           <div className={`h-2 rounded-full overflow-hidden ${

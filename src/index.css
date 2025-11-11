@@ -501,3 +501,59 @@ body {
 .read-the-docs {
   color: #888;
 }
+
+/* ==== CSS STYLING ==== */
+/* .bio {
+  max-width: 700px;
+  margin: 30px auto;
+  padding: 25px 30px;
+  background: linear-gradient(135deg, #ffffff, #f3f4f6);
+  border-radius: 15px;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+  font-family: 'Segoe UI', sans-serif;
+  color: #222;
+}
+
+.bio h3 {
+  color: #0072ff;
+  border-left: 5px solid #0072ff;
+  padding-left: 10px;
+  margin-top: 25px;
+  margin-bottom: 10px;
+  font-size: 1.4rem;
+}
+
+.bio ul {
+  list-style-type: "🏅 ";
+  padding-left: 25px;
+}
+
+.bio li {
+  margin-bottom: 8px;
+  font-size: 1rem;
+  line-height: 1.6;
+  transition: all 0.2s ease;
+}
+
+.bio li:hover {
+  transform: translateX(5px);
+  color: #0072ff;
+}
+
+.bio strong {
+  color: #ff9500;
+} */
+
+.swiper-button-prev,
+.swiper-button-next {
+  color: white;
+  width: 20px;
+  height: 20px;
+  position: absolute !important;
+  bottom: 0 !important;
+  right: 0 !important;
+}
+
+.swiper {
+  position: relative !important;
+}

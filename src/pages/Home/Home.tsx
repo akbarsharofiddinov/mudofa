@@ -34,7 +34,7 @@ const Home: React.FC = () => {
     });
   }, [mouseX, mouseY]);
 
-  const { horseAnimationFinished } = useAppSelector(state => state.infoSlice);
+  const { horseAnimationFinished } = useAppSelector(state => state.info);
 
   useEffect(() => {
     const handleResize = () => {
@@ -58,9 +58,9 @@ const Home: React.FC = () => {
   return (
     <>
       {!horseAnimationFinished && (
-        <div className='fixed inset-0 z-50 flex items-center justify-center bg-black/10 backdrop-blur-xl'>
+        <div className='fixed inset-0 z-20 flex items-center justify-center bg-black/10 backdrop-blur-xl'>
 
-          <div className='relative w-full flex items-center z-90 justify-center h-screen p-8 backdrop-blur-md'>
+          <div className='relative w-full flex items-center z-20 justify-center h-screen p-8 backdrop-blur-md'>
             <LightRays raysOrigin="top-center"
               raysColor="#00ffff"
               raysSpeed={1.5}
@@ -87,7 +87,7 @@ const Home: React.FC = () => {
       )}
 
       {/* Optimized Background Effects - Only on Home */}
-      <div className='fixed inset-0 z-90 opacity-20'>
+      <div className='fixed inset-0 z-30 opacity-20'>
         <Galaxy
           mouseInteraction={true}
           starSpeed={3}
@@ -97,7 +97,7 @@ const Home: React.FC = () => {
           repulsionStrength={1}
         />
       </div>
-      <section id="home" ref={containerRef} className="relative h-screen overflow-hidden">
+      <section id="home" ref={containerRef} className="relative h-screen mx-auto overflow-hidden">
         {/* Optimized Canvas Background */}
         <OptimizedCanvas
           particleCount={typeof window !== 'undefined' ? (window.innerWidth < 768 ? 25 : window.innerWidth < 1024 ? 40 : 60) : 40}

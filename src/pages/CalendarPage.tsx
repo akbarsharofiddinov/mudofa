@@ -2,7 +2,7 @@ import { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { useLanguage } from '../hooks/useLanguage';
 import { useTheme } from '../hooks/useTheme';
-import { Calendar as CalendarIcon, MapPin, Users, Clock, ChevronLeft, ChevronRight, Trophy, Target, Crosshair, Flame, Shield, Swords, X, ArrowLeft } from 'lucide-react';
+import { Calendar as CalendarIcon, MapPin, Users, Clock, ChevronLeft, ChevronRight, Trophy, Target, Crosshair, Flame, Swords, X, ArrowLeft } from 'lucide-react';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/UI/tabs';
 import { ScrollArea } from '@/components/UI/scroll-area';
 
@@ -25,7 +25,7 @@ interface EventData {
 const getSportIcon = (sport: string) => {
   const sportLower = sport.toLowerCase();
   
-  if (sportLower.includes('otishma') || sportLower.includes('shooting')) {
+  if (sportLower.includes('otish') || sportLower.includes('shooting')) {
     return { icon: Crosshair, color: 'text-red-500' };
   }
   if (sportLower.includes('kurash') || sportLower.includes('wrestling')) {
@@ -151,8 +151,8 @@ export function CalendarPage({ onClose }: CalendarPageProps) {
     },
     {
       date: { day: 25, month: 2, year: 2025 },
-      title: 'Haftalik Tayyorgarlik - Otishma',
-      sport: 'Otishma',
+      title: 'Haftalik Tayyorgarlik - O\'q otish',
+      sport: 'O\'q otish',
       location: 'Toshkent, O\'zbekiston',
       participants: 50,
       time: '10:00 - 14:00',
@@ -303,41 +303,31 @@ export function CalendarPage({ onClose }: CalendarPageProps) {
         )}
       </div>
 
-      <div className="relative z-10 min-h-screen py-8 px-4 sm:px-6 lg:px-8">
-        <div className="max-w-7xl mx-auto">
+      <div className="relative z-10 h-[50vh] py-8 px-4 sm:px-6 lg:px-8">
+        <div className="max-w-[1000px] mx-auto">
           {/* Header */}
           <motion.div
             initial={{ opacity: 0, y: -20 }}
             animate={{ opacity: 1, y: 0 }}
-            className="flex items-center justify-between mb-8"
+            className="flex items-center justify-between mb-4"
           >
             <div className="flex items-center gap-4">
               <motion.button
                 onClick={onClose}
-                className="p-3 bg-slate-800/50 hover:bg-slate-700/50 rounded-xl transition-colors border border-amber-500/30"
+                className="p-2 bg-slate-800/50 hover:bg-slate-700/50 rounded-lg transition-colors border border-amber-500/30"
                 whileHover={{ scale: 1.1 }}
                 whileTap={{ scale: 0.9 }}
               >
-                <ArrowLeft className="w-6 h-6 text-amber-400" />
+                <ArrowLeft className="w-4 h-4 text-amber-400" />
               </motion.button>
               
               <div>
-                <h1 className="text-4xl md:text-5xl bg-gradient-to-r from-emerald-400 to-amber-400 bg-clip-text text-transparent flex items-center gap-3">
-                  <CalendarIcon className="w-10 h-10 text-amber-400" />
-                  {language === 'uz' ? 'Tadbirlar Taqvimi' : 'Календарь Мероприятий'}
+                <h1 className="text-lg md:text-xl bg-gradient-to-r from-emerald-400 to-amber-400 bg-clip-text text-transparent flex items-center gap-3">
+                  <CalendarIcon className="w-4 h-4 text-amber-400" />
+                {language === 'uz' ? 'Barcha sport tadbirlari' : 'Все спортивные мероприятия'}
                 </h1>
-                <p className="text-amber-200/60 mt-2">{language === 'uz' ? 'Barcha sport tadbirlari' : 'Все спортивные мероприятия'}</p>
               </div>
             </div>
-
-            <motion.button
-              onClick={onClose}
-              className="p-3 bg-red-500/20 hover:bg-red-500/30 rounded-xl transition-colors border border-red-500/40"
-              whileHover={{ scale: 1.1, rotate: 90 }}
-              whileTap={{ scale: 0.9 }}
-            >
-              <X className="w-6 h-6 text-red-400" />
-            </motion.button>
           </motion.div>
 
           {/* Tabs */}
@@ -347,7 +337,7 @@ export function CalendarPage({ onClose }: CalendarPageProps) {
             transition={{ delay: 0.2 }}
           >
             <Tabs value={calendarView} onValueChange={(v) => setCalendarView(v as CalendarView)}>
-              <TabsList className="grid w-full md:w-auto md:inline-grid grid-cols-3 bg-slate-800/50 mb-8">
+              <TabsList className="grid w-full md:w-auto md:inline-grid grid-cols-3 bg-slate-800/50 mb-1">
                 <TabsTrigger value="month" className="data-[state=active]:bg-gradient-to-r data-[state=active]:from-amber-500 data-[state=active]:to-emerald-500">
                   {language === 'uz' ? 'Oylik' : 'Месяц'}
                 </TabsTrigger>
@@ -361,38 +351,38 @@ export function CalendarPage({ onClose }: CalendarPageProps) {
 
               {/* Month View */}
               <TabsContent value="month">
-                <div className="space-y-6">
+                <div className="space-y-2">
                   {/* Month Navigation */}
-                  <div className="flex items-center justify-between mb-6 bg-slate-800/50 backdrop-blur-xl border border-amber-500/30 rounded-2xl p-4">
+                  <div className="flex items-center justify-between mb-2 bg-slate-800/50 backdrop-blur-xl border border-amber-500/30 rounded-2xl p-2">
                     <motion.button
                       onClick={previousMonth}
-                      className="p-3 bg-slate-700/50 hover:bg-slate-600/50 rounded-xl transition-colors"
+                      className="p-2 bg-slate-700/50 hover:bg-slate-600/50 rounded-md transition-colors"
                       whileHover={{ scale: 1.1, x: -5 }}
                       whileTap={{ scale: 0.9 }}
                     >
-                      <ChevronLeft className="w-6 h-6 text-amber-400" />
+                      <ChevronLeft className="w-4 h-4 text-amber-400" />
                     </motion.button>
                     
-                    <h3 className="text-3xl text-emerald-400">
+                    <h3 className="text-xl text-emerald-400">
                       {months[currentMonth]} {currentYear}
                     </h3>
                     
                     <motion.button
                       onClick={nextMonth}
-                      className="p-3 bg-slate-700/50 hover:bg-slate-600/50 rounded-xl transition-colors"
+                      className="p-2 bg-slate-700/50 hover:bg-slate-600/50 rounded-md transition-colors"
                       whileHover={{ scale: 1.1, x: 5 }}
                       whileTap={{ scale: 0.9 }}
                     >
-                      <ChevronRight className="w-6 h-6 text-amber-400" />
+                      <ChevronRight className="w-4 h-4 text-amber-400" />
                     </motion.button>
                   </div>
 
                   {/* Calendar Grid */}
-                  <div className="bg-slate-800/30 backdrop-blur-xl border border-amber-500/20 rounded-3xl p-6">
-                    <div className="grid grid-cols-7 gap-2 mb-4">
+                  <div className="bg-slate-800/30 backdrop-blur-xl border border-amber-500/20 rounded-3xl p-4">
+                    <div className="grid grid-cols-7 gap-2 mb-2">
                       {/* Day Headers */}
                       {daysOfWeek.map(day => (
-                        <div key={day} className="text-center text-amber-400 p-3 rounded-xl bg-slate-800/50">
+                        <div key={day} className="text-center text-amber-400 p-2 rounded-xl bg-slate-800/50 text-xs">
                           {day}
                         </div>
                       ))}
@@ -402,7 +392,7 @@ export function CalendarPage({ onClose }: CalendarPageProps) {
                       {/* Calendar Days */}
                       {generateCalendarDays().map((day, index) => {
                         if (!day) {
-                          return <div key={`empty-${index}`} className="p-2 min-h-[100px]" />;
+                          return <div key={`empty-${index}`} className="p-2 min-h-[60px]" />;
                         }
 
                         const date = new Date(currentYear, currentMonth, day);
@@ -415,7 +405,7 @@ export function CalendarPage({ onClose }: CalendarPageProps) {
                         return (
                           <motion.div
                             key={day}
-                            className={`relative p-3 rounded-xl cursor-pointer transition-all min-h-[100px] ${
+                            className={`relative p-2 rounded-md cursor-pointer transition-all min-h-[60px] ${
                               isToday
                                 ? 'bg-gradient-to-br from-amber-500/30 to-emerald-500/30 border-2 border-amber-500'
                                 : dayEvents.length > 0
@@ -431,10 +421,10 @@ export function CalendarPage({ onClose }: CalendarPageProps) {
                             whileHover={{ scale: 1.05, y: -5 }}
                             whileTap={{ scale: 0.95 }}
                           >
-                            <div className="text-lg text-amber-200 mb-2">{day}</div>
+                            <div className="text-sm text-amber-200 mb-2">{day}</div>
                             {dayEvents.length > 0 && (
                               <div className="mt-1">
-                                <div className="flex items-center gap-1 mb-2">
+                                <div className="flex items-center gap-1 mb-1">
                                   <div className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse" />
                                   <span className="text-xs text-emerald-400">{dayEvents.length}</span>
                                 </div>

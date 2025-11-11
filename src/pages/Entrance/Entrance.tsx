@@ -1,6 +1,6 @@
 import ShinyText from "@/components/UI/ShinyText";
 import { LogIn, Search } from "lucide-react";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Outlet } from "react-router-dom";
 import NavigationLogo from "@/components/NavigationLogo";
 import { Cursor, useTypewriter } from "react-simple-typewriter";
@@ -9,6 +9,10 @@ import EnhancedTimelineNav from "@/EnhancedTimelineNav";
 import { HorseModel } from "@/ThreeJS";
 import SearchInput from "../Search/SearchInput";
 import PhotoRoom from "../Search/PhotoRoom";
+import { degToRad } from "three/src/math/MathUtils.js";
+import FlashAndLogo from "@/components/AnimatedLogo/FlashAndLogo";
+import { useAppSelector } from "@/store/hooks";
+import { Button } from "antd";
 
 const navItems = [
   { label: "Rahbariyat", link: "leadership" },
@@ -25,10 +29,25 @@ const Entrance: React.FC = () => {
   const [showEntrance, setShowEntrance] = useState(false);
   const [showGallery, setShowGallery] = useState(false);
   const [imageData, setImageData] = useState<string[]>([]);
+  // Y should be top of the navbar
   const [coordinates, setCoordinates] = useState<[number, number, number]>([
-    -13, -2.6, 0,
+    0, 2.4, 0,
   ]);
-  const [rotation, setRotation] = useState<[number, number, number]>([0, 0, 0]);
+  const [rotation, setRotation] = useState<[number, number, number]>([
+    0,
+    degToRad(90),
+    0,
+  ]);
+
+  const [flash, setFlash] = useState(false);
+
+  window.addEventListener("click", (e) => console.log(e.target));
+
+  const { horseAnimationFinished } = useAppSelector((state) => state.info);
+
+  useEffect(() => {
+    if (horseAnimationFinished) setFlash(true);
+  }, [horseAnimationFinished]);
 
   const text = useTypewriter({
     words: ["O’zbekiston Respublikasi Mudofa Vazirligi Sport Markazi"],
@@ -46,7 +65,11 @@ const Entrance: React.FC = () => {
   return showGallery ? (
     <>
       <div className="w-full h-screen flex flex-col items-center overflow-hidden">
-        <PhotoRoom setImageData={setImageData} imageData={imageData}>
+        <PhotoRoom
+          setImageData={setImageData}
+          setShowGallery={setShowGallery}
+          imageData={imageData}
+        >
           <h1 className="text-center font-bold text-2xl m-2">
             Galareya xonasi
           </h1>
@@ -60,28 +83,7 @@ const Entrance: React.FC = () => {
         <NavigationLogo />
         <Outlet />
         {location.pathname === "/" && (
-          <div className="absolute inset-0 z-[80]">
-            <div className="flex flex-col gap-4 absolute top-4 left-4">
-              {/* Coordinates */}
-              <div>
-                <h1>Coordinates</h1>
-                <p>
-                  X: {coordinates[0]} <br />
-                  Y: {coordinates[1]} <br />
-                  Z: {coordinates[2]}
-                </p>
-              </div>
-
-              {/* Rotation */}
-              <div>
-                <h1>Rotation</h1>
-                <p>
-                  X: {rotation[0]} <br />
-                  Y: {rotation[1]} <br />
-                  Z: {rotation[2]}
-                </p>
-              </div>
-            </div>
+          <div className="absolute inset-0 z-[20]">
             <HorseModel
               coordinates={coordinates}
               setCoordinates={setCoordinates}
@@ -91,7 +93,13 @@ const Entrance: React.FC = () => {
           </div>
         )}
 
-        <div className="flex items-center gap-2 fixed top-4 right-4 z-90">
+        <FlashAndLogo
+          show={flash}
+          totalMs={1200}
+          onEnd={() => setFlash(false)}
+        />
+
+        <div className="flex items-center gap-2 fixed top-4 right-4 z-[999]">
           {/* <Input placeholder="Qidirish" className='rounded-full bg-white/20 backdrop-blur-sm border-0 text-white placeholder:text-white focus:border-0 focus:ring-0 max-w-[100px] h-10' /> */}
           <ShinyText className="h-10 bg-transparent hover:bg-white/10 transition-all duration-300">
             <div

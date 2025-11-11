@@ -12,6 +12,8 @@
       {
         "list": "off"
       }
-    ]
+    ],
+    "axe/name-role-value": "off",
+    "axe/text-alternatives": "off"
   }
 }

@@ -1,6 +1,7 @@
-/* eslint-disable react-refresh/only-export-components */
+/* eslint-disable react-hooks/exhaustive-deps */
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import React, { useState, useEffect } from "react";
-import { motion, AnimatePresence } from "framer-motion";
+import { motion } from "framer-motion";
 import { useLanguage } from "@/hooks/useLanguage";
 import { useTheme } from "@/hooks/useTheme";
 import { getTranslation } from "@/utils/translations";
@@ -9,24 +10,36 @@ import {
   Medal,
   Award,
   TrendingUp,
-  Target,
   Swords,
-  Users,
-  Zap,
-  Shield,
-  Activity,
-  Circle,
-  Flame,
   Crosshair,
-  Dumbbell,
 } from "lucide-react";
 import { Badge } from "@/components/UI/badge";
+import {
+  GiBowman,
+  GiBoxingGlove,
+  GiHighKick,
+  GiWeightLiftingUp,
+} from "react-icons/gi";
+import {
+  MdDirectionsBike,
+  MdOutlineRowing,
+  MdOutlineSportsKabaddi,
+} from "react-icons/md";
+import { FaRunning, FaTableTennis } from "react-icons/fa";
+import { CiBasketball } from "react-icons/ci";
+import Trampoline from "@/assets/SVGs/trampoline.svg";
+import Fighting from "@/assets/SVGs/fighting.svg";
+import ArmWrestling from "@/assets/SVGs/armwrestling.svg";
+import Sambo from "@/assets/SVGs/sambo.svg";
+import MMA from "@/assets/SVGs/mma.svg";
+import Wrestling from "@/assets/SVGs/wrestling.svg";
+import Biathlon from "@/assets/SVGs/biathlon.svg";
 
 interface SportStats {
   id: number;
   sportUz: string;
   sportRu: string;
-  icon: React.ComponentType<any>;
+  icon: React.ComponentType<any> | string;
   iconColor: string;
   data2025: {
     republicGold: number;
@@ -100,10 +113,41 @@ const Statistics: React.FC = () => {
       },
     },
     {
+      id: 21,
+      sportUz: "Stenddan o'q otish",
+      sportRu: "Стендовая стрельба",
+      icon: Crosshair,
+      iconColor: "text-amber-600",
+      data2025: {
+        republicGold: 0,
+        republicSilver: 1,
+        republicBronze: 2,
+        intlGold: 0,
+        intlSilver: 0,
+        intlBronze: 0,
+      },
+      data2024: {
+        republicGold: 0,
+        republicSilver: 0,
+        republicBronze: 0,
+        intlGold: 0,
+        intlSilver: 0,
+        intlBronze: 0,
+      },
+      data2023: {
+        republicGold: 0,
+        republicSilver: 0,
+        republicBronze: 0,
+        intlGold: 0,
+        intlSilver: 0,
+        intlBronze: 0,
+      },
+    },
+    {
       id: 1,
       sportUz: "Boks",
       sportRu: "Бокс",
-      icon: Shield,
+      icon: GiBoxingGlove,
       iconColor: "text-red-500",
       data2025: {
         republicGold: 6,
@@ -134,7 +178,7 @@ const Statistics: React.FC = () => {
       id: 2,
       sportUz: "Taekvondo",
       sportRu: "Тхэквондо",
-      icon: Flame,
+      icon: GiHighKick,
       iconColor: "text-orange-500",
       data2025: {
         republicGold: 0,
@@ -163,9 +207,9 @@ const Statistics: React.FC = () => {
     },
     {
       id: 3,
-      sportUz: "Erkak kurash",
-      sportRu: "Мужская борьба",
-      icon: Swords,
+      sportUz: "Erkin kurash",
+      sportRu: "Свободный бой",
+      icon: MdOutlineSportsKabaddi,
       iconColor: "text-purple-500",
       data2025: {
         republicGold: 2,
@@ -196,7 +240,7 @@ const Statistics: React.FC = () => {
       id: 4,
       sportUz: "Jyudo",
       sportRu: "Дзюдо",
-      icon: Users,
+      icon: MdOutlineSportsKabaddi,
       iconColor: "text-indigo-500",
       data2025: {
         republicGold: 5,
@@ -227,7 +271,7 @@ const Statistics: React.FC = () => {
       id: 5,
       sportUz: "Og'ir atlet",
       sportRu: "Тяжелая атлетика",
-      icon: Dumbbell,
+      icon: GiWeightLiftingUp,
       iconColor: "text-amber-500",
       data2025: {
         republicGold: 3,
@@ -258,7 +302,7 @@ const Statistics: React.FC = () => {
       id: 6,
       sportUz: "Engil atlet",
       sportRu: "Легкая атлетика",
-      icon: Activity,
+      icon: FaRunning,
       iconColor: "text-emerald-500",
       data2025: {
         republicGold: 10,
@@ -289,7 +333,7 @@ const Statistics: React.FC = () => {
       id: 7,
       sportUz: "Baydarka eshkak",
       sportRu: "Байдарка и каноэ",
-      icon: Activity,
+      icon: MdOutlineRowing,
       iconColor: "text-blue-500",
       data2025: {
         republicGold: 17,
@@ -320,7 +364,7 @@ const Statistics: React.FC = () => {
       id: 8,
       sportUz: "Basketbol",
       sportRu: "Баскетбол",
-      icon: Circle,
+      icon: CiBasketball,
       iconColor: "text-orange-400",
       data2025: {
         republicGold: 1,
@@ -349,9 +393,9 @@ const Statistics: React.FC = () => {
     },
     {
       id: 10,
-      sportUz: "Kamoddan otish",
+      sportUz: "Kamondan otish",
       sportRu: "Стрельба из лука",
-      icon: Target,
+      icon: GiBowman,
       iconColor: "text-green-500",
       data2025: {
         republicGold: 10,
@@ -382,7 +426,7 @@ const Statistics: React.FC = () => {
       id: 11,
       sportUz: "Tennis",
       sportRu: "Теннис",
-      icon: Circle,
+      icon: FaTableTennis,
       iconColor: "text-yellow-500",
       data2025: {
         republicGold: 0,
@@ -413,7 +457,7 @@ const Statistics: React.FC = () => {
       id: 12,
       sportUz: "Trampolin",
       sportRu: "Батут",
-      icon: Activity,
+      icon: Trampoline,
       iconColor: "text-pink-500",
       data2025: {
         republicGold: 1,
@@ -442,7 +486,7 @@ const Statistics: React.FC = () => {
     },
     {
       id: 13,
-      sportUz: "Qalich'bozlik",
+      sportUz: "Qilichbozlik",
       sportRu: "Фехтование",
       icon: Swords,
       iconColor: "text-cyan-500",
@@ -475,7 +519,7 @@ const Statistics: React.FC = () => {
       id: 14,
       sportUz: "Velosport",
       sportRu: "Велоспорт",
-      icon: Circle,
+      icon: MdDirectionsBike,
       iconColor: "text-lime-500",
       data2025: {
         republicGold: 9,
@@ -504,9 +548,9 @@ const Statistics: React.FC = () => {
     },
     {
       id: 15,
-      sportUz: "Ku'l jangi",
-      sportRu: "Вольная борьба",
-      icon: Zap,
+      sportUz: "Qo'l jangi",
+      sportRu: "Рукопашный бой",
+      icon: Fighting,
       iconColor: "text-purple-400",
       data2025: {
         republicGold: 0,
@@ -537,7 +581,7 @@ const Statistics: React.FC = () => {
       id: 16,
       sportUz: "Armrestling",
       sportRu: "Армрестлинг",
-      icon: Dumbbell,
+      icon: ArmWrestling,
       iconColor: "text-gray-500",
       data2025: {
         republicGold: 0,
@@ -568,7 +612,7 @@ const Statistics: React.FC = () => {
       id: 17,
       sportUz: "Sambo",
       sportRu: "Самбо",
-      icon: Shield,
+      icon: Sambo,
       iconColor: "text-red-600",
       data2025: {
         republicGold: 0,
@@ -599,7 +643,7 @@ const Statistics: React.FC = () => {
       id: 18,
       sportUz: "MMA",
       sportRu: "ММА",
-      icon: Flame,
+      icon: MMA,
       iconColor: "text-orange-600",
       data2025: {
         republicGold: 2,
@@ -630,7 +674,7 @@ const Statistics: React.FC = () => {
       id: 19,
       sportUz: "Kurash",
       sportRu: "Кураш",
-      icon: Users,
+      icon: Wrestling,
       iconColor: "text-teal-500",
       data2025: {
         republicGold: 1,
@@ -661,7 +705,7 @@ const Statistics: React.FC = () => {
       id: 20,
       sportUz: "Biatlon",
       sportRu: "Биатлон",
-      icon: Crosshair,
+      icon: Biathlon,
       iconColor: "text-blue-600",
       data2025: {
         republicGold: 7,
@@ -689,41 +733,10 @@ const Statistics: React.FC = () => {
       },
     },
     {
-      id: 21,
-      sportUz: "Stenddan o'q otish",
-      sportRu: "Стендовая стрельба",
-      icon: Target,
-      iconColor: "text-amber-600",
-      data2025: {
-        republicGold: 0,
-        republicSilver: 1,
-        republicBronze: 2,
-        intlGold: 0,
-        intlSilver: 0,
-        intlBronze: 0,
-      },
-      data2024: {
-        republicGold: 0,
-        republicSilver: 0,
-        republicBronze: 0,
-        intlGold: 0,
-        intlSilver: 0,
-        intlBronze: 0,
-      },
-      data2023: {
-        republicGold: 0,
-        republicSilver: 0,
-        republicBronze: 0,
-        intlGold: 0,
-        intlSilver: 0,
-        intlBronze: 0,
-      },
-    },
-    {
       id: 22,
       sportUz: "Karate",
       sportRu: "Каратэ",
-      icon: Flame,
+      icon: GiHighKick,
       iconColor: "text-red-500",
       data2025: {
         republicGold: 0,
@@ -813,7 +826,7 @@ const Statistics: React.FC = () => {
 
   return (
     <div
-      className={`min-h-screen py-20 px-4 sm:px-6 lg:px-8 relative overflow-hidden transition-colors duration-300 ${
+      className={`min-h-screen pt-10 pb-20 px-4 sm:px-6 lg:px-8 relative overflow-hidden transition-colors duration-300 ${
         isDark
           ? "bg-gradient-to-br from-slate-950 via-emerald-950 to-slate-900"
           : "bg-gradient-to-br from-blue-50 via-white to-green-50"
@@ -960,16 +973,16 @@ const Statistics: React.FC = () => {
         )}
       </div>
 
-      <div className="max-w-7xl mx-auto relative z-10">
+      <div className="max-w-[1000px] mx-auto relative z-10">
         {/* Header */}
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          className="text-center mb-12"
+          className="text-center mb-6"
         >
           <h2
-            className={`text-5xl md:text-6xl mb-4 bg-gradient-to-r ${
+            className={`text-3xl md:text-4xl mb-4 bg-gradient-to-r ${
               isDark
                 ? "from-amber-400 to-emerald-400"
                 : "from-amber-600 to-emerald-600"
@@ -980,9 +993,9 @@ const Statistics: React.FC = () => {
           <p
             className={`${
               isDark ? "text-amber-200/70" : "text-gray-600"
-            } text-lg mb-6`}
+            } text-sm mb-3`}
           >
-            2023-2025{" "}
+            2023-2025
             {language === "uz"
               ? "yillar bo'yicha musobaqalar natijalari"
               : "Результаты соревнований за годы"}
@@ -995,7 +1008,7 @@ const Statistics: React.FC = () => {
           initial={{ opacity: 0, scale: 0.9 }}
           whileInView={{ opacity: 1, scale: 1 }}
           viewport={{ once: true }}
-          className="flex justify-center mb-12"
+          className="flex justify-center mb-6"
         >
           <div
             className={`inline-flex ${
@@ -1010,7 +1023,7 @@ const Statistics: React.FC = () => {
                 onClick={() => setSelectedYear(year as 2023 | 2024 | 2025)}
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
-                className={`px-8 py-3 rounded-full transition-all ${
+                className={`px-4 py-2 text-sm rounded-full transition-all ${
                   selectedYear === year
                     ? "bg-gradient-to-r from-amber-500 to-emerald-500 text-white shadow-lg"
                     : isDark
@@ -1018,7 +1031,7 @@ const Statistics: React.FC = () => {
                     : "text-gray-600 hover:text-gray-900"
                 }`}
               >
-                <span className="text-lg">{year}</span>
+                <span className="text-sm">{year}</span>
               </motion.button>
             ))}
           </div>
@@ -1029,7 +1042,7 @@ const Statistics: React.FC = () => {
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-12"
+          className="grid grid-cols-1 md:grid-cols-3 gap-5 mb-4"
         >
           {/* Gold Total */}
           <motion.div
@@ -1046,10 +1059,10 @@ const Statistics: React.FC = () => {
                 isDark
                   ? "border-amber-500/30"
                   : "border-amber-300/60 shadow-amber-200/50"
-              } rounded-3xl p-8 shadow-2xl transition-all duration-300 hover:shadow-amber-300/60 hover:border-amber-400/70`}
+              } rounded-3xl p-6 shadow-2xl transition-all duration-300 hover:shadow-amber-300/60 hover:border-amber-400/70`}
             >
               <div className="flex items-center justify-between mb-4">
-                <Trophy className="w-12 h-12 text-yellow-400" />
+                <Trophy className="w-6 h-6 text-yellow-400" />
                 <Badge className="bg-yellow-500/20 text-yellow-600 border-yellow-500/30">
                   {language === "uz" ? "Oltin" : "Золото"}
                 </Badge>
@@ -1058,14 +1071,16 @@ const Statistics: React.FC = () => {
                 key={`gold-${selectedYear}`}
                 initial={{ scale: 0 }}
                 animate={{ scale: 1 }}
-                className="text-5xl bg-gradient-to-r from-yellow-400 to-amber-500 bg-clip-text text-transparent mb-2"
+                className="text-3xl bg-gradient-to-r from-yellow-400 to-amber-500 bg-clip-text text-transparent mb-2"
               >
                 {animatedCounts.totalGold || 0}
               </motion.div>
               <div className={isDark ? "text-amber-200/70" : "text-gray-600"}>
-                {language === "uz"
-                  ? "Jami oltin medallar"
-                  : "Всего золотых медалей"}
+                <span className="text-sm">
+                  {language === "uz"
+                    ? "Jami oltin medallar"
+                    : "Всего золотых медалей"}
+                </span>
               </div>
             </div>
           </motion.div>
@@ -1085,10 +1100,10 @@ const Statistics: React.FC = () => {
                 isDark
                   ? "border-gray-500/30"
                   : "border-slate-300/60 shadow-slate-200/50"
-              } rounded-3xl p-8 shadow-2xl transition-all duration-300 hover:shadow-slate-300/60 hover:border-slate-400/70`}
+              } rounded-3xl p-6 shadow-2xl transition-all duration-300 hover:shadow-slate-300/60 hover:border-slate-400/70`}
             >
               <div className="flex items-center justify-between mb-4">
-                <Medal className="w-12 h-12 text-gray-400" />
+                <Medal className="w-6 h-6 text-gray-400" />
                 <Badge className="bg-gray-500/20 text-gray-600 border-gray-500/30">
                   {language === "uz" ? "Kumush" : "Серебро"}
                 </Badge>
@@ -1097,14 +1112,16 @@ const Statistics: React.FC = () => {
                 key={`silver-${selectedYear}`}
                 initial={{ scale: 0 }}
                 animate={{ scale: 1 }}
-                className="text-5xl bg-gradient-to-r from-gray-300 to-gray-500 bg-clip-text text-transparent mb-2"
+                className="text-3xl bg-gradient-to-r from-gray-300 to-gray-500 bg-clip-text text-transparent mb-2"
               >
                 {animatedCounts.totalSilver || 0}
               </motion.div>
               <div className={isDark ? "text-amber-200/70" : "text-gray-600"}>
-                {language === "uz"
-                  ? "Jami kumush medallar"
-                  : "Всего серебряных медалей"}
+                <span className="text-sm">
+                  {language === "uz"
+                    ? "Jami kumush medallar"
+                    : "Всего серебряных медалей"}
+                </span>
               </div>
             </div>
           </motion.div>
@@ -1124,10 +1141,10 @@ const Statistics: React.FC = () => {
                 isDark
                   ? "border-orange-500/30"
                   : "border-orange-300/60 shadow-orange-200/50"
-              } rounded-3xl p-8 shadow-2xl transition-all duration-300 hover:shadow-orange-300/60 hover:border-orange-400/70`}
+              } rounded-3xl p-6 shadow-2xl transition-all duration-300 hover:shadow-orange-300/60 hover:border-orange-400/70`}
             >
               <div className="flex items-center justify-between mb-4">
-                <Award className="w-12 h-12 text-orange-400" />
+                <Award className="w-6 h-6 text-orange-400" />
                 <Badge className="bg-orange-500/20 text-orange-600 border-orange-500/30">
                   {language === "uz" ? "Bronza" : "Бронза"}
                 </Badge>
@@ -1136,21 +1153,23 @@ const Statistics: React.FC = () => {
                 key={`bronze-${selectedYear}`}
                 initial={{ scale: 0 }}
                 animate={{ scale: 1 }}
-                className="text-5xl bg-gradient-to-r from-orange-400 to-orange-700 bg-clip-text text-transparent mb-2"
+                className="text-3xl bg-gradient-to-r from-orange-400 to-orange-700 bg-clip-text text-transparent mb-2"
               >
                 {animatedCounts.totalBronze || 0}
               </motion.div>
               <div className={isDark ? "text-amber-200/70" : "text-gray-600"}>
-                {language === "uz"
-                  ? "Jami bronza medallar"
-                  : "Всего бронзовых медалей"}
+                <span className="text-sm">
+                  {language === "uz"
+                    ? "Jami bronza medallar"
+                    : "Всего бронзовых медалей"}
+                </span>
               </div>
             </div>
           </motion.div>
         </motion.div>
 
         {/* Competition Type Stats */}
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-12">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-3 mb-4">
           {/* Republican Competitions */}
           <motion.div
             initial={{ opacity: 0, x: -30 }}
@@ -1163,19 +1182,19 @@ const Statistics: React.FC = () => {
             } backdrop-blur-xl border rounded-3xl p-6 shadow-2xl transition-all duration-300 hover:shadow-purple-300/60 hover:border-purple-400/70`}
           >
             <h3
-              className={`text-2xl ${
+              className={`text-lg ${
                 isDark ? "text-purple-300" : "text-purple-600"
               } mb-6 flex items-center gap-2`}
             >
-              <TrendingUp className="w-6 h-6" />
+              <TrendingUp className="w-4 h-4" />
               {language === "uz"
                 ? "Respublika musobaqalari"
                 : "Республиканские соревнования"}
             </h3>
             <div className="grid grid-cols-3 gap-4">
               <div className="text-center p-4 bg-yellow-500/10 rounded-2xl border border-yellow-500/20">
-                <Trophy className="w-8 h-8 text-yellow-400 mx-auto mb-2" />
-                <div className="text-3xl text-yellow-500 mb-1">
+                <Trophy className="w-6 h-6 text-yellow-400 mx-auto mb-2" />
+                <div className="text-2xl text-yellow-500 mb-1">
                   {totals.republicGold}
                 </div>
                 <div
@@ -1187,8 +1206,8 @@ const Statistics: React.FC = () => {
                 </div>
               </div>
               <div className="text-center p-4 bg-gray-500/10 rounded-2xl border border-gray-500/20">
-                <Medal className="w-8 h-8 text-gray-400 mx-auto mb-2" />
-                <div className="text-3xl text-gray-500 mb-1">
+                <Medal className="w-6 h-6 text-gray-400 mx-auto mb-2" />
+                <div className="text-2xl text-gray-500 mb-1">
                   {totals.republicSilver}
                 </div>
                 <div
@@ -1200,8 +1219,8 @@ const Statistics: React.FC = () => {
                 </div>
               </div>
               <div className="text-center p-4 bg-orange-500/10 rounded-2xl border border-orange-500/20">
-                <Award className="w-8 h-8 text-orange-400 mx-auto mb-2" />
-                <div className="text-3xl text-orange-500 mb-1">
+                <Award className="w-6 h-6 text-orange-400 mx-auto mb-2" />
+                <div className="text-2xl text-orange-500 mb-1">
                   {totals.republicBronze}
                 </div>
                 <div
@@ -1227,19 +1246,19 @@ const Statistics: React.FC = () => {
             } backdrop-blur-xl border rounded-3xl p-6 shadow-2xl transition-all duration-300 hover:shadow-blue-300/60 hover:border-blue-400/70`}
           >
             <h3
-              className={`text-2xl ${
+              className={`text-lg ${
                 isDark ? "text-blue-300" : "text-blue-600"
               } mb-6 flex items-center gap-2`}
             >
-              <TrendingUp className="w-6 h-6" />
+              <TrendingUp className="w-4 h-4" />
               {language === "uz"
                 ? "Xalqaro musobaqalar"
                 : "Международные соревнования"}
             </h3>
             <div className="grid grid-cols-3 gap-4">
               <div className="text-center p-4 bg-yellow-500/10 rounded-2xl border border-yellow-500/20">
-                <Trophy className="w-8 h-8 text-yellow-400 mx-auto mb-2" />
-                <div className="text-3xl text-yellow-500 mb-1">
+                <Trophy className="w-6 h-6 text-yellow-400 mx-auto mb-2" />
+                <div className="text-2xl text-yellow-500 mb-1">
                   {totals.intlGold}
                 </div>
                 <div
@@ -1251,8 +1270,8 @@ const Statistics: React.FC = () => {
                 </div>
               </div>
               <div className="text-center p-4 bg-gray-500/10 rounded-2xl border border-gray-500/20">
-                <Medal className="w-8 h-8 text-gray-400 mx-auto mb-2" />
-                <div className="text-3xl text-gray-500 mb-1">
+                <Medal className="w-6 h-6 text-gray-400 mx-auto mb-2" />
+                <div className="text-2xl text-gray-500 mb-1">
                   {totals.intlSilver}
                 </div>
                 <div
@@ -1264,8 +1283,8 @@ const Statistics: React.FC = () => {
                 </div>
               </div>
               <div className="text-center p-4 bg-orange-500/10 rounded-2xl border border-orange-500/20">
-                <Award className="w-8 h-8 text-orange-400 mx-auto mb-2" />
-                <div className="text-3xl text-orange-500 mb-1">
+                <Award className="w-6 h-6 text-orange-400 mx-auto mb-2" />
+                <div className="text-2xl text-orange-500 mb-1">
                   {totals.intlBronze}
                 </div>
                 <div
@@ -1287,7 +1306,7 @@ const Statistics: React.FC = () => {
           viewport={{ once: true }}
         >
           <h3
-            className={`text-3xl ${
+            className={`text-2xl ${
               isDark ? "text-amber-300" : "text-amber-600"
             } mb-6 text-center`}
           >
@@ -1320,9 +1339,7 @@ const Statistics: React.FC = () => {
                       isDark
                         ? "bg-gradient-to-br from-slate-900/90 to-emerald-900/50 border-amber-500/30"
                         : "bg-gradient-to-br from-white/95 via-emerald-50/40 to-amber-50/30 border-emerald-300/60 shadow-emerald-200/50"
-                    } backdrop-blur-xl border rounded-2xl p-5 shadow-2xl transition-all duration-300 hover:shadow-emerald-300/60 hover:border-amber-400/70 ${
-                      isShooting ? "ring-2 ring-red-500/50" : ""
-                    }`}
+                    } backdrop-blur-xl border rounded-2xl p-5 shadow-2xl transition-all duration-300 hover:shadow-emerald-300/60 hover:border-amber-400/70`}
                   >
                     {/* Sport Icon & Name */}
                     <div className="flex items-center justify-between mb-4">
@@ -1334,11 +1351,19 @@ const Statistics: React.FC = () => {
                         {language === "uz" ? sport.sportUz : sport.sportRu}
                       </h4>
                       <motion.div
-                        className="flex-shrink-0 w-12 h-12 rounded-xl bg-gradient-to-br from-amber-500/20 to-emerald-500/20 flex items-center justify-center border border-amber-500/30"
+                        className="flex-shrink-0 w-10 h-10 rounded-xl bg-gradient-to-br from-amber-500/20 to-emerald-500/20 flex items-center justify-center border border-amber-500/30"
                         whileHover={{ rotate: 360 }}
                         transition={{ duration: 0.6 }}
                       >
-                        <SportIcon className={`w-6 h-6 ${sport.iconColor}`} />
+                        {typeof sport.icon === "string" ? (
+                          <img
+                            src={sport.icon}
+                            alt={sport.sportUz}
+                            className={`w-6 h-6 ${sport.iconColor}`}
+                          />
+                        ) : (
+                          <SportIcon className={`w-6 h-6 ${sport.iconColor}`} />
+                        )}
                       </motion.div>
                     </div>
 

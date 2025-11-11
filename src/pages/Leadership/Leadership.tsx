@@ -14,7 +14,6 @@ import {
   GraduationCap,
   Trophy,
   Sparkles,
-  Shield,
   Clipboard,
   Timer,
   Radio,
@@ -104,16 +103,16 @@ const LeaderShip: React.FC = () => {
       ],
     },
     {
-      name: "Major Dilshod Tursunov",
+      name: "Mayor Dilshod Tursunov",
       position: language === "uz" ? "Bosh murabbiy" : "Главный тренер",
       image: leaderImage,
-      specialty: "Otishma sport",
+      specialty: "O'q otish sport",
       email: "dilshod.tursunov@modsport.uz",
       phone: "+998 71 234 56 80",
       experience: "12 yil",
       education: "Jismoniy tarbiya instituti",
       awards: ["Eng yaxshi murabbiy", "Oltin medal (Osiyo)", "Xizmat medali"],
-      bio: "Major Dilshod Tursunov otishma bo'yicha malakali murabbiy, 50 dan ortiq sportchilarni tayyorlagan.",
+      bio: "Mayor Dilshod Tursunov O'q otish bo'yicha malakali murabbiy, 50 dan ortiq sportchilarni tayyorlagan.",
       skills: [
         { name: "Sportchilarni tayyorlash", level: 97 },
         { name: "Texnik ko'nikma", level: 95 },
@@ -127,7 +126,7 @@ const LeaderShip: React.FC = () => {
       ],
     },
     {
-      name: "Captain Rustam Aliyev",
+      name: "Kapitan Rustam Aliyev",
       position: language === "uz" ? "Tibbiyot bo'limi" : "Медицинский отдел",
       image: leaderImage,
       specialty: "Sport tibbiyoti",
@@ -140,7 +139,7 @@ const LeaderShip: React.FC = () => {
         "Tibbiy innovatsiya",
         "Xizmat sertifikati",
       ],
-      bio: "Captain Rustam Aliyev sport tibbiyoti sohasida malakali mutaxassis.",
+      bio: "Kapitan Rustam Aliyev sport tibbiyoti sohasida malakali mutaxassis.",
       skills: [
         { name: "Diagnostika", level: 92 },
         { name: "Reabilitatsiya", level: 94 },
@@ -154,7 +153,7 @@ const LeaderShip: React.FC = () => {
       ],
     },
     {
-      name: "Lieutenant Sardor Yusupov",
+      name: "Litenent Sardor Yusupov",
       position: language === "uz" ? "Yoshlar bo'limi" : "Отдел молодежи",
       image: leaderImage,
       specialty: "Yoshlar rivojlanishi",
@@ -167,7 +166,7 @@ const LeaderShip: React.FC = () => {
         "Yoshlar ishonchi",
         "Innovatsiya mukofoti",
       ],
-      bio: "Lieutenant Sardor Yusupov yoshlar bilan ishlash bo'yicha tajribali mutaxassis.",
+      bio: "Litenent Sardor Yusupov yoshlar bilan ishlash bo'yicha tajribali mutaxassis.",
       skills: [
         { name: "Yoshlar bilan ishlash", level: 95 },
         { name: "Psixologik yordam", level: 90 },
@@ -181,7 +180,7 @@ const LeaderShip: React.FC = () => {
       ],
     },
     {
-      name: "Officer Nodira Rahimova",
+      name: "Ofitser Nodira Rahimova",
       position: language === "uz" ? "Moliya bo'limi" : "Финансовый отдел",
       image: leaderImage,
       specialty: "Moliya va budjet",
@@ -194,7 +193,7 @@ const LeaderShip: React.FC = () => {
         "Innovatsiya mukofoti",
         "Professional mukofot",
       ],
-      bio: "Officer Nodira Rahimova moliya sohasida malakali mutaxassis.",
+      bio: "Ofitser Nodira Rahimova moliya sohasida malakali mutaxassis.",
       skills: [
         { name: "Budjet rejalashtirish", level: 97 },
         { name: "Moliyaviy tahlil", level: 95 },
@@ -213,8 +212,8 @@ const LeaderShip: React.FC = () => {
   const isDark = theme === "dark";
 
   return (
-    <div
-      className={`min-h-screen py-20 px-4 sm:px-6 lg:px-8 relative overflow-hidden transition-colors duration-300 ${
+    <section
+      className={`h-screen pt-10 pb-18 px-4 sm:px-6 lg:px-8 relative overflow-hidden transition-colors duration-300 ${
         isDark
           ? "bg-gradient-to-br from-slate-950 via-slate-900 to-emerald-950"
           : "bg-gradient-to-br from-slate-50 via-white to-emerald-50"
@@ -649,39 +648,16 @@ const LeaderShip: React.FC = () => {
         </div>
       </div>
 
-      <div className="max-w-7xl mx-auto relative z-10">
+      <div className="max-w-[1000px] mx-auto relative z-10">
         {/* Header */}
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          className="text-center mb-16"
+          className="text-center mb-6"
         >
-          <motion.div
-            className="inline-flex items-center justify-center mb-6"
-            initial={{ scale: 0, rotate: -180 }}
-            whileInView={{ scale: 1, rotate: 0 }}
-            viewport={{ once: true }}
-            transition={{ type: "spring", duration: 1 }}
-          >
-            <div className="relative">
-              <motion.div
-                className="w-20 h-20 rounded-full bg-gradient-to-br from-amber-500 to-emerald-500 flex items-center justify-center shadow-2xl"
-                animate={{
-                  boxShadow: [
-                    "0 0 30px rgba(251, 191, 36, 0.4)",
-                    "0 0 60px rgba(16, 185, 129, 0.6)",
-                    "0 0 30px rgba(251, 191, 36, 0.4)",
-                  ],
-                }}
-                transition={{ duration: 3, repeat: Infinity }}
-              >
-                <Shield className="w-10 h-10 text-white" />
-              </motion.div>
-            </div>
-          </motion.div>
 
-          <h2 className="text-5xl md:text-6xl mb-4 bg-gradient-to-r from-amber-400 to-emerald-400 bg-clip-text text-transparent">
+          <h2 className="text-3xl md:text-4xl mb-4 bg-gradient-to-r from-amber-400 to-emerald-400 bg-clip-text text-transparent">
             {language === "uz"
               ? "Rahbariyat"
               : language === "ru"
@@ -692,15 +668,15 @@ const LeaderShip: React.FC = () => {
         </motion.div>
 
         {/* Orbital Leadership Display */}
-        <div className="relative flex items-center justify-center min-h-[650px]">
+        <div className="relative flex items-center justify-center min-h-[440px]">
           {/* Central Hub */}
           <motion.div
-            className="absolute inset-0 flex items-center justify-center"
+            className="flex items-center justify-center"
             initial={{ opacity: 0, scale: 0 }}
             animate={{ opacity: 1, scale: 1 }}
             transition={{ duration: 1 }}
           >
-            <div className="relative w-48 h-48">
+            <div className="relative w-32 h-32">
               {/* Center Circle */}
               <motion.div
                 className="w-full h-full rounded-full bg-gradient-to-br from-slate-900/95 to-emerald-900/70 backdrop-blur-xl border-4 border-amber-500/60 shadow-2xl flex items-center justify-center"
@@ -714,7 +690,7 @@ const LeaderShip: React.FC = () => {
                 transition={{ duration: 3, repeat: Infinity }}
               >
                 <div className="text-center">
-                  <Users className="w-12 h-12 text-amber-400 mx-auto mb-2" />
+                  <Users className="w-4 h-4 text-amber-400 mx-auto mb-2" />
                   <div className="text-emerald-400 text-3xl">
                     {leaders.length}
                   </div>
@@ -738,7 +714,7 @@ const LeaderShip: React.FC = () => {
                     key={`line-${index}`}
                     className="absolute top-1/2 left-1/2 origin-left"
                     style={{
-                      width: "280px",
+                      width: "160px",
                       height: "4px",
                       transform: `translate(-50%, -50%) rotate(${angle}deg)`,
                     }}
@@ -776,7 +752,7 @@ const LeaderShip: React.FC = () => {
           {/* Orbiting Leader Profiles */}
           {leaders.map((leader, index) => {
             const angle = (index * 360) / leaders.length;
-            const radius = 280;
+            const radius = 160;
             const x = Math.cos((angle * Math.PI) / 180) * radius;
             const y = Math.sin((angle * Math.PI) / 180) * radius;
 
@@ -818,7 +794,7 @@ const LeaderShip: React.FC = () => {
                 <div className="relative">
                   {/* Rank Badge */}
                   <motion.div
-                    className="absolute -top-3 -right-3 w-9 h-9 rounded-full bg-gradient-to-br from-amber-500 to-emerald-500 flex items-center justify-center text-white shadow-2xl z-20 border-2 border-white/20"
+                    className="absolute -top-3 -right-3 w-7 h-7 rounded-full bg-gradient-to-br from-amber-500 to-emerald-500 flex items-center justify-center text-white shadow-2xl z-20 border-2 border-white/20"
                     animate={{
                       rotate: hoveredIndex === index ? 360 : 0,
                       scale: hoveredIndex === index ? 1.2 : 1,
@@ -830,7 +806,7 @@ const LeaderShip: React.FC = () => {
 
                   {/* Profile Image */}
                   <motion.div
-                    className="w-36 h-36 rounded-full border-4 overflow-hidden shadow-2xl relative bg-slate-900"
+                    className="w-24 h-24 rounded-full border-4 overflow-hidden shadow-2xl relative bg-slate-900"
                     animate={{
                       borderColor:
                         hoveredIndex === index
@@ -911,7 +887,7 @@ const LeaderShip: React.FC = () => {
         onOpenChange={() => setSelectedLeader(null)}
       >
         <DialogContent
-          className={`max-w-5xl max-h-[90vh] overflow-y-auto border ${
+          className={`min-w-[800px] max-w-[800px] max-h-[75vh] overflow-y-auto border ${
             isDark
               ? "bg-gradient-to-br from-slate-900/95 to-emerald-900/60 border-amber-500/40 text-white"
               : "bg-gradient-to-br from-white via-emerald-50/50 to-white border-emerald-300/50 text-gray-900"
@@ -921,12 +897,12 @@ const LeaderShip: React.FC = () => {
             <>
               <DialogHeader>
                 <DialogTitle
-                  className={`text-3xl flex items-center gap-3 ${
+                  className={`text-xl font-light flex items-center gap-3 ${
                     isDark ? "text-amber-300" : "text-gray-800"
                   }`}
                 >
-                  <div className="w-12 h-12 rounded-full bg-gradient-to-br from-amber-500 to-emerald-500 flex items-center justify-center">
-                    <Award className="w-6 h-6 text-white" />
+                  <div className="w-8 h-8 rounded-full bg-gradient-to-br from-amber-500 to-emerald-500 flex items-center justify-center">
+                    <Award className="w-4 h-4 text-white" />
                   </div>
                   {selectedLeader.name}
                 </DialogTitle>
@@ -937,35 +913,35 @@ const LeaderShip: React.FC = () => {
                 </DialogDescription>
               </DialogHeader>
 
-              <div className="grid md:grid-cols-2 gap-6 mt-6">
+              <div className="grid md:grid-cols-2 gap-3 mt-1">
                 <div className="space-y-6">
                   <motion.div
-                    className="relative rounded-2xl overflow-hidden"
+                    className="relative rounded-xl overflow-hidden flex items-center justify-center"
                     initial={{ opacity: 0, x: -20 }}
                     animate={{ opacity: 1, x: 0 }}
                   >
                     <ImageWithFallback
                       src={selectedLeader.image}
                       alt={selectedLeader.name}
-                      className="w-full h-80 object-cover"
+                      className="w-32 h-2w-32 object-cover"
                     />
                     <div className="absolute inset-0 bg-gradient-to-t from-slate-900 via-transparent to-transparent" />
                   </motion.div>
 
                   <div
-                    className={`rounded-2xl p-6 border ${
+                    className={`rounded-xl p-2 border ${
                       isDark
                         ? "bg-slate-800/50 border-amber-500/20"
                         : "bg-emerald-50/50 border-emerald-300/40"
                     }`}
                   >
                     <h4
-                      className={`mb-4 flex items-center gap-2 ${
+                      className={`mb-2 flex items-center gap-2 ${
                         isDark ? "text-amber-300" : "text-emerald-700"
                       }`}
                     >
-                      <Mail className="w-5 h-5" />
-                      {language === "uz" ? "Aloqa" : "Контакты"}
+                      <Mail className="w-4 h-4" />
+                      <span className="text-xs">{language === "uz" ? "Aloqa" : "Контакты"}</span>
                     </h4>
                     <div className="space-y-3">
                       <div
@@ -974,7 +950,7 @@ const LeaderShip: React.FC = () => {
                         }`}
                       >
                         <Mail className="w-4 h-4" />
-                        <span className="text-sm">{selectedLeader.email}</span>
+                        <span className="text-xs">{selectedLeader.email}</span>
                       </div>
                       <div
                         className={`flex items-center gap-3 ${
@@ -982,7 +958,7 @@ const LeaderShip: React.FC = () => {
                         }`}
                       >
                         <Phone className="w-4 h-4" />
-                        <span className="text-sm">{selectedLeader.phone}</span>
+                        <span className="text-xs">{selectedLeader.phone}</span>
                       </div>
                     </div>
                   </div>
@@ -991,12 +967,12 @@ const LeaderShip: React.FC = () => {
                     {selectedLeader.stats.map((stat, index) => (
                       <div
                         key={index}
-                        className="bg-gradient-to-br from-amber-500/20 to-emerald-500/20 rounded-xl p-4 text-center border border-amber-500/30"
+                        className="bg-gradient-to-br from-amber-500/20 to-emerald-500/20 rounded-xl p-2 text-center border border-amber-500/30"
                       >
-                        <div className="text-2xl text-amber-400 mb-1">
+                        <div className="text-lg text-amber-400">
                           {stat.value}
                         </div>
-                        <div className="text-xs text-amber-200/70">
+                        <div className="text-[10px] text-amber-200/70 ">
                           {stat.label}
                         </div>
                       </div>
@@ -1028,31 +1004,31 @@ const LeaderShip: React.FC = () => {
                     </TabsList>
 
                     <TabsContent value="about" className="space-y-4">
-                      <div className="bg-slate-800/50 rounded-xl p-5 border border-amber-500/20">
+                      <div className="bg-slate-800/50 rounded-xl p-3 border border-amber-500/20">
                         <h5 className="text-emerald-400 mb-2 flex items-center gap-2">
                           <Briefcase className="w-4 h-4" />
-                          {language === "uz" ? "Tajriba" : "Опыт"}
+                          <span className="text-xs">{language === "uz" ? "Tajriba" : "Опыт"}</span>
                         </h5>
-                        <p className="text-amber-200/70 text-sm">
+                        <p className="text-amber-200/70 text-xs">
                           {selectedLeader.experience}
                         </p>
                       </div>
 
-                      <div className="bg-slate-800/50 rounded-xl p-5 border border-amber-500/20">
+                      <div className="bg-slate-800/50 rounded-xl p-3 border border-amber-500/20">
                         <h5 className="text-emerald-400 mb-2 flex items-center gap-2">
                           <GraduationCap className="w-4 h-4" />
-                          {language === "uz" ? "Ta'lim" : "Образование"}
+                          <span className="text-xs">{language === "uz" ? "Ta'lim" : "Образование"}</span>
                         </h5>
-                        <p className="text-amber-200/70 text-sm">
+                        <p className="text-amber-200/70 text-xs">
                           {selectedLeader.education}
                         </p>
                       </div>
 
-                      <div className="bg-slate-800/50 rounded-xl p-5 border border-amber-500/20">
+                      <div className="bg-slate-800/50 rounded-xl p-3 border border-amber-500/20">
                         <h5 className="text-emerald-400 mb-3">
-                          {language === "uz" ? "Biografiya" : "Биография"}
+                          <span className="text-xs">{language === "uz" ? "Biografiya" : "Биография"}</span>
                         </h5>
-                        <p className="text-amber-200/70 text-sm leading-relaxed">
+                        <p className="text-amber-200/70 text-xs leading-relaxed">
                           {selectedLeader.bio}
                         </p>
                       </div>
@@ -1098,7 +1074,7 @@ const LeaderShip: React.FC = () => {
                           whileHover={{ scale: 1.02, x: 5 }}
                         >
                           <div className="w-10 h-10 rounded-full bg-gradient-to-br from-amber-500 to-emerald-500 flex items-center justify-center flex-shrink-0">
-                            <Trophy className="w-5 h-5 text-white" />
+                            <Trophy className="w-4 h-4 text-white" />
                           </div>
                           <span className="text-amber-200/90 text-sm">
                             {award}
@@ -1113,7 +1089,7 @@ const LeaderShip: React.FC = () => {
           )}
         </DialogContent>
       </Dialog>
-    </div>
+    </section>
   );
 };
 

@@ -1,5 +1,6 @@
-import { useEffect, useRef } from "react"
-import { Button } from "antd"
+import { useEffect, useRef } from "react";
+import { Button } from "antd";
+import { RiArrowGoBackFill } from "react-icons/ri";
 
 const ROTATE_SPEED = 0.25;
 const SWAP_ANGLE = 90;
@@ -8,20 +9,22 @@ interface IProps {
   imageData: string[];
   setImageData: React.Dispatch<React.SetStateAction<string[]>>;
   children?: React.ReactNode;
+  setShowGallery: React.Dispatch<React.SetStateAction<boolean>>
 }
 
-const PhotoRoom: React.FC<IProps> = ({ imageData, setImageData, children }) => {
-
+const PhotoRoom: React.FC<IProps> = ({ imageData, setImageData, children, setShowGallery }) => {
   const el = useRef<HTMLDivElement>(null);
 
   // requestAnimationFrame handler
   const animId = useRef<number>(0);
 
   // Transition states variables
-  let currentAngle: number, swapIndex: number, nextIndex: number, nextAngle: number;
+  let currentAngle: number,
+    swapIndex: number,
+    nextIndex: number,
+    nextAngle: number;
 
   useEffect(() => {
-
     // Reset current state angles
     currentAngle = 0;
     nextAngle = SWAP_ANGLE;
@@ -30,14 +33,12 @@ const PhotoRoom: React.FC<IProps> = ({ imageData, setImageData, children }) => {
     const walls = el.current!.children;
 
     for (let i = 0; i < 4; i++) {
-
       const wall = walls[i];
 
       // Create wall item
       if (wall.children.length == 0) {
-
-        const item = document.createElement('div') as HTMLDivElement;
-        item.className = 'wall-item';
+        const item = document.createElement("div") as HTMLDivElement;
+        item.className = "wall-item";
         wall.appendChild(item);
       }
       // Apply image background
@@ -55,7 +56,6 @@ const PhotoRoom: React.FC<IProps> = ({ imageData, setImageData, children }) => {
 
     // Rotate the room
     const updateFrame = () => {
-
       // Ignore empty data
       if (imageData.length == 0) return;
 
@@ -65,23 +65,27 @@ const PhotoRoom: React.FC<IProps> = ({ imageData, setImageData, children }) => {
 
       // Swap wall image on checked angle
       if (currentAngle >= nextAngle) {
-
         nextAngle += SWAP_ANGLE;
         const theWall = walls[swapIndex].firstChild as HTMLDivElement;
         theWall.style.backgroundImage = `url(${imageData[nextIndex]})`;
 
         // Increase indexes on every SWAP_ANGLE
-        swapIndex++; nextIndex++;
+        swapIndex++;
+        nextIndex++;
         if (swapIndex >= 4) swapIndex = 0;
         if (nextIndex >= imageData.length) nextIndex = 0;
       }
       animId.current = requestAnimationFrame(updateFrame);
-    }
+    };
     updateFrame();
   }, [imageData]);
 
   return (
     <div className="container">
+      <Button onClick={() => setShowGallery(false)} className="absolute top-6 left-6 z-90">
+        <RiArrowGoBackFill />
+        Ortga
+      </Button>
       <div className="absolute top-4 left-[50%] translate-x-[-50%] z-90">
         {children}
       </div>
@@ -94,7 +98,7 @@ const PhotoRoom: React.FC<IProps> = ({ imageData, setImageData, children }) => {
         <div className="room-wall bottom-wall"></div>
       </div>
     </div>
-  )
-}
+  );
+};
 
-export default PhotoRoom
+export default PhotoRoom;

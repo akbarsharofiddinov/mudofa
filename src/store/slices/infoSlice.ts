@@ -1,10 +1,10 @@
 import { createSlice } from "@reduxjs/toolkit";
 
-interface InfoState {
+export interface IState {
   horseAnimationFinished: boolean;
 }
 
-const initialState: InfoState = {
+const initialState: IState = {
   horseAnimationFinished: false,
 };
 

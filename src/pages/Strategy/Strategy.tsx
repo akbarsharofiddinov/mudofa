@@ -110,7 +110,7 @@ export function Strategy() {
   ];
 
   return (
-    <div className={`min-h-screen py-20 px-4 sm:px-6 lg:px-8 relative overflow-hidden transition-colors duration-300 ${
+    <div className={`min-h-screen pt-10 pb-20 px-4 sm:px-6 lg:px-8 relative overflow-hidden transition-colors duration-300 ${
       isDark
         ? 'bg-gradient-to-br from-slate-950 via-emerald-950 to-slate-900'
         : 'bg-gradient-to-br from-blue-50 via-white to-emerald-50'
@@ -221,7 +221,7 @@ export function Strategy() {
         ))}
       </div>
 
-      <div className="max-w-7xl mx-auto relative z-10">
+      <div className="max-w-[1000px] mx-auto relative z-10">
         {/* Header */}
         <motion.div
           initial={{ opacity: 0, y: 30 }}
@@ -229,7 +229,7 @@ export function Strategy() {
           viewport={{ once: true }}
           className="text-center mb-16"
         >
-          <h2 className="text-5xl md:text-6xl mb-4 bg-gradient-to-r from-emerald-400 to-amber-400 bg-clip-text text-transparent">
+          <h2 className="text-3xl md:text-4xl mb-4 bg-gradient-to-r from-emerald-400 to-amber-400 bg-clip-text text-transparent">
             {t.strategy.title}
           </h2>
           <div className="w-32 h-1 bg-gradient-to-r from-emerald-500 to-amber-500 mx-auto rounded-full"></div>

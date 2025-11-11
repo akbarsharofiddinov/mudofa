@@ -24,7 +24,7 @@ const NavigationLogo: React.FC<NavigationLogoProps> = ({ className = '' }) => {
   // On other pages, show logo in top-left corner
   return (
     <button
-      className={`group fixed top-4 left-4 z-90 px-2.5 py-1 rounded-full transition-all hover:shadow-xl ${className}`}
+      className={`group fixed top-4 left-4 z-[999] px-2.5 py-1 rounded-full transition-all hover:shadow-xl ${className}`}
       onClick={handleLogoClick}
       aria-label="Go home"
     >
